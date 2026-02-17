@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WIB Pro Generator - Verbesserte Version</title>
+    <title>WIHB Pro Generator</title>
+    <link rel="icon" type="image/png" href="/mnt/user-data/uploads/logo_wei.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Russo+One&family=Teko:wght@700&family=Anton&family=Black+Ops+One&family=Permanent+Marker&family=Righteous&family=Staatliches&family=Passion+One:wght@700&family=Montserrat:wght@900&family=Impact&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Russo+One&family=Teko:wght@700&family=Anton&family=Black+Ops+One&family=Permanent+Marker&family=Righteous&family=Staatliches&family=Passion+One:wght@700&display=swap');
         
         * {
             margin: 0;
@@ -15,42 +16,48 @@
 
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
             color: #fff;
             padding: 20px;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1800px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 42px;
-            background: linear-gradient(45deg, #ff0844, #ffb199);
+            font-size: 38px;
+            background: linear-gradient(135deg, #ff0000, #ffffff, #ff0000);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+            font-weight: 900;
+            letter-spacing: 3px;
         }
 
         .main-grid {
             display: grid;
-            grid-template-columns: 450px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 20px;
         }
 
         .controls-panel {
-            background: #1a1a1a;
-            padding: 25px;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            padding: 20px;
             border-radius: 15px;
             height: fit-content;
             max-height: 90vh;
             overflow-y: auto;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.1);
         }
 
         .controls-panel::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         .controls-panel::-webkit-scrollbar-track {
@@ -59,13 +66,17 @@
         }
 
         .controls-panel::-webkit-scrollbar-thumb {
-            background: #ff0844;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
             border-radius: 10px;
         }
 
+        .controls-panel::-webkit-scrollbar-thumb:hover {
+            background: #ff0000;
+        }
+
         .section {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
             border-bottom: 1px solid #2a2a2a;
         }
 
@@ -74,24 +85,25 @@
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            color: #ff0844;
-            margin-bottom: 18px;
+            color: #ff0000;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
 
         .control-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #aaa;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -100,10 +112,10 @@
         input[type="number"],
         select {
             width: 100%;
-            padding: 12px;
-            background: #2a2a2a;
-            border: 2px solid #3a3a3a;
-            border-radius: 8px;
+            padding: 10px;
+            background: #0f0f0f;
+            border: 2px solid #2a2a2a;
+            border-radius: 6px;
             color: #fff;
             font-size: 14px;
             transition: all 0.3s;
@@ -113,98 +125,112 @@
         input[type="number"]:focus,
         select:focus {
             outline: none;
-            border-color: #ff0844;
-            background: #333;
+            border-color: #ff0000;
+            background: #1a1a1a;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         input[type="color"] {
             width: 100%;
-            height: 50px;
+            height: 45px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
         }
 
         input[type="file"] {
             width: 100%;
-            padding: 10px;
-            background: #2a2a2a;
-            border: 2px dashed #3a3a3a;
-            border-radius: 8px;
+            padding: 8px;
+            background: #0f0f0f;
+            border: 2px dashed #2a2a2a;
+            border-radius: 6px;
             cursor: pointer;
             color: #999;
-            font-size: 13px;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        input[type="file"]:hover {
+            border-color: #ff0000;
+            background: #1a1a1a;
         }
 
         input[type="range"] {
             width: 100%;
-            height: 8px;
-            background: #3a3a3a;
-            border-radius: 4px;
+            height: 6px;
+            background: #2a2a2a;
+            border-radius: 3px;
             outline: none;
             -webkit-appearance: none;
         }
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #ff0844;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
             border-radius: 50%;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #ff0000;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
         }
 
         .range-value {
             display: inline-block;
             float: right;
-            color: #ff0844;
+            color: #ff0000;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .preset-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
         }
 
         .preset-btn {
-            padding: 12px;
-            background: #2a2a2a;
-            border: 2px solid #3a3a3a;
-            border-radius: 8px;
+            padding: 10px;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            border: 2px solid #2a2a2a;
+            border-radius: 6px;
             color: #fff;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .preset-btn:hover {
-            border-color: #ff0844;
-            background: #333;
+            border-color: #ff0000;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
         }
 
         .action-btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #ff0844, #ff5e3a);
+            padding: 14px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
         }
 
         .action-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 8, 68, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+            background: linear-gradient(135deg, #ff1a1a, #dd0000);
         }
 
         .action-btn:disabled {
@@ -214,14 +240,21 @@
 
         .action-btn.secondary {
             background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-            border: 2px solid #3a3a3a;
+            border: 2px solid #ff0000;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .action-btn.secondary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
         }
 
         .canvas-container {
-            background: #1a1a1a;
-            padding: 25px;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+            padding: 20px;
             border-radius: 15px;
             position: relative;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.1);
         }
 
         #renderCanvas {
@@ -229,64 +262,62 @@
             max-width: 1280px;
             height: auto;
             display: block;
-            border-radius: 12px;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border: 2px solid #2a2a2a;
         }
 
         .audio-controls {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
             align-items: center;
         }
 
         .play-btn {
-            width: 55px;
-            height: 55px;
-            background: #ff0844;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
         }
 
         .play-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 5px 25px rgba(255, 8, 68, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 5px 25px rgba(255, 0, 0, 0.5);
         }
 
         .audio-time {
             flex: 1;
-            background: #2a2a2a;
-            padding: 12px 18px;
-            border-radius: 10px;
+            background: #0f0f0f;
+            padding: 10px 15px;
+            border-radius: 8px;
             font-family: monospace;
-            color: #ff0844;
-            font-size: 16px;
-            font-weight: 700;
+            text-align: center;
+            border: 2px solid #2a2a2a;
         }
 
         .status-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #1a1a1a;
-            padding: 15px 25px;
-            border-radius: 10px;
-            border-left: 4px solid #ff0844;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: none;
-            z-index: 1000;
-            font-weight: 600;
+            margin-top: 10px;
+            padding: 12px;
+            background: #0f0f0f;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            border-left: 4px solid #ff0000;
         }
 
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .checkbox-group input[type="checkbox"] {
@@ -298,937 +329,1022 @@
         .checkbox-group label {
             margin: 0;
             cursor: pointer;
+            color: #fff;
+            font-size: 14px;
         }
 
-        .two-col-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .color-row {
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
-        }
-
-        .color-row input[type="color"] {
-            flex: 1;
-            height: 50px;
-        }
-
-        .remove-btn {
-            padding: 12px;
-            background: #ff0844;
-            border: none;
+        .tips {
+            background: #0f0f0f;
+            padding: 15px;
             border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
+            margin-top: 15px;
+            border-left: 4px solid #ff0000;
+            border: 1px solid #2a2a2a;
         }
 
-        .remove-btn:hover {
-            background: #cc0035;
+        .tips h4 {
+            color: #ff0000;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips li {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .tips li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ff0000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎵 WIB PRO GENERATOR - VERBESSERT</h1>
-        
+        <h1>🔥 WIHB PRO - Thumbnail & Video Generator</h1>
+        > <img src="logo_wei.png" alt="wahllaichhabbock">
         <div class="main-grid">
             <!-- Controls Panel -->
             <div class="controls-panel">
-                
-                <!-- Background Image Section -->
+                <!-- Text Section -->
                 <div class="section">
-                    <div class="section-title">🖼️ Hintergrundbild</div>
+                    <div class="section-title">📝 Text Einstellungen</div>
+                    
                     <div class="control-group">
-                        <label>Hintergrundbild hochladen</label>
-                        <input type="file" id="backgroundImage" accept="image/*">
+                        <label>Haupttext (Zeile 1)</label>
+                        <input type="text" id="text1" value="DRILL" maxlength="25">
                     </div>
+                    
                     <div class="control-group">
-                        <label>Helligkeit <span class="range-value" id="bgBrightnessValue">100%</span></label>
-                        <input type="range" id="bgBrightness" min="0" max="200" value="100">
+                        <label>Subtext (Zeile 2)</label>
+                        <input type="text" id="text2" value="BALKAN" maxlength="25">
                     </div>
+                    
                     <div class="control-group">
-                        <label>Unschärfe <span class="range-value" id="bgBlurValue">0px</span></label>
-                        <input type="range" id="bgBlur" min="0" max="30" value="0">
-                    </div>
-                    <div class="control-group">
-                        <label>Skalierung <span class="range-value" id="bgScaleValue">100%</span></label>
-                        <input type="range" id="bgScale" min="50" max="200" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Position X <span class="range-value" id="bgPosXValue">50%</span></label>
-                        <input type="range" id="bgPosX" min="0" max="100" value="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Position Y <span class="range-value" id="bgPosYValue">50%</span></label>
-                        <input type="range" id="bgPosY" min="0" max="100" value="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Abdunklung (Overlay) <span class="range-value" id="bgOverlayValue">30%</span></label>
-                        <input type="range" id="bgOverlay" min="0" max="100" value="30">
-                    </div>
-                </div>
-
-                <!-- Text 1 Section -->
-                <div class="section">
-                    <div class="section-title">✏️ Text 1 (Oben)</div>
-                    <div class="control-group">
-                        <label>Text</label>
-                        <input type="text" id="text1" value="DRILL" maxlength="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Schriftart</label>
+                        <label>Schriftart Haupttext</label>
                         <select id="font1">
-                            <option value="Bebas Neue">Bebas Neue</option>
-                            <option value="Anton">Anton</option>
-                            <option value="Oswald">Oswald</option>
-                            <option value="Russo One">Russo One</option>
-                            <option value="Black Ops One">Black Ops One</option>
-                            <option value="Permanent Marker">Permanent Marker</option>
-                            <option value="Righteous">Righteous</option>
-                            <option value="Staatliches">Staatliches</option>
-                            <option value="Passion One">Passion One</option>
-                            <option value="Teko">Teko</option>
-                            <option value="Montserrat">Montserrat Black</option>
-                            <option value="Impact">Impact</option>
+                            <option value="'Anton', sans-serif">Anton (Standard)</option>
+                            <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+                            <option value="'Oswald', sans-serif">Oswald</option>
+                            <option value="'Russo One', sans-serif">Russo One</option>
+                            <option value="'Teko', sans-serif">Teko</option>
+                            <option value="'Black Ops One', sans-serif">Black Ops One</option>
+                            <option value="'Permanent Marker', sans-serif">Permanent Marker</option>
+                            <option value="'Righteous', sans-serif">Righteous</option>
+                            <option value="'Staatliches', sans-serif">Staatliches</option>
+                            <option value="'Passion One', sans-serif">Passion One</option>
                         </select>
                     </div>
+                    
                     <div class="control-group">
-                        <label>Textfarbe</label>
+                        <label>Schriftart Subtext</label>
+                        <select id="font2">
+                            <option value="'Anton', sans-serif">Anton (Standard)</option>
+                            <option value="'Bebas Neue', sans-serif">Bebas Neue</option>
+                            <option value="'Oswald', sans-serif">Oswald</option>
+                            <option value="'Russo One', sans-serif">Russo One</option>
+                            <option value="'Teko', sans-serif">Teko</option>
+                            <option value="'Black Ops One', sans-serif">Black Ops One</option>
+                            <option value="'Permanent Marker', sans-serif">Permanent Marker</option>
+                            <option value="'Righteous', sans-serif">Righteous</option>
+                            <option value="'Staatliches', sans-serif">Staatliches</option>
+                            <option value="'Passion One', sans-serif">Passion One</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Haupttext Farbe</label>
                         <input type="color" id="textColor1" value="#ffffff">
                     </div>
+                    
                     <div class="control-group">
-                        <label>Textgröße <span class="range-value" id="fontSize1Value">120px</span></label>
-                        <input type="range" id="fontSize1" min="50" max="300" value="120">
-                    </div>
-                    <div class="control-group">
-                        <label>Position Y <span class="range-value" id="textPosY1Value">200</span></label>
-                        <input type="range" id="textPosY1" min="50" max="500" value="200">
-                    </div>
-                    <div class="control-group">
-                        <label>Buchstabenabstand <span class="range-value" id="letterSpacing1Value">20px</span></label>
-                        <input type="range" id="letterSpacing1" min="0" max="50" value="20">
-                    </div>
-                    <div class="control-group">
-                        <label>Kontur Dicke <span class="range-value" id="stroke1Value">6px</span></label>
-                        <input type="range" id="stroke1" min="0" max="20" value="6">
-                    </div>
-                    <div class="control-group">
-                        <label>Konturfarbe</label>
-                        <input type="color" id="strokeColor1" value="#000000">
-                    </div>
-                    <div class="control-group">
-                        <label>Transparenz <span class="range-value" id="opacity1Value">100%</span></label>
-                        <input type="range" id="opacity1" min="0" max="100" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Rotation <span class="range-value" id="rotation1Value">0°</span></label>
-                        <input type="range" id="rotation1" min="-45" max="45" value="0">
-                    </div>
-                </div>
-
-                <!-- Text 2 Section -->
-                <div class="section">
-                    <div class="section-title">✏️ Text 2 (Unten)</div>
-                    <div class="control-group">
-                        <label>Text</label>
-                        <input type="text" id="text2" value="BALKAN" maxlength="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Schriftart</label>
-                        <select id="font2">
-                            <option value="Bebas Neue">Bebas Neue</option>
-                            <option value="Anton">Anton</option>
-                            <option value="Oswald">Oswald</option>
-                            <option value="Russo One">Russo One</option>
-                            <option value="Black Ops One">Black Ops One</option>
-                            <option value="Permanent Marker">Permanent Marker</option>
-                            <option value="Righteous">Righteous</option>
-                            <option value="Staatliches">Staatliches</option>
-                            <option value="Passion One">Passion One</option>
-                            <option value="Teko">Teko</option>
-                            <option value="Montserrat">Montserrat Black</option>
-                            <option value="Impact">Impact</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label>Textfarbe</label>
+                        <label>Subtext Farbe</label>
                         <input type="color" id="textColor2" value="#ffffff">
                     </div>
+                </div>
+
+                <!-- Colors Section -->
+                <div class="section">
+                    <div class="section-title">🎨 Farben</div>
+                    
                     <div class="control-group">
-                        <label>Textgröße <span class="range-value" id="fontSize2Value">120px</span></label>
-                        <input type="range" id="fontSize2" min="50" max="300" value="120">
+                        <label>Glow Farbe 1</label>
+                        <input type="color" id="color1" value="#ff0844">
                     </div>
+                    
                     <div class="control-group">
-                        <label>Position Y <span class="range-value" id="textPosY2Value">520</span></label>
-                        <input type="range" id="textPosY2" min="400" max="650" value="520">
-                    </div>
-                    <div class="control-group">
-                        <label>Buchstabenabstand <span class="range-value" id="letterSpacing2Value">20px</span></label>
-                        <input type="range" id="letterSpacing2" min="0" max="50" value="20">
-                    </div>
-                    <div class="control-group">
-                        <label>Kontur Dicke <span class="range-value" id="stroke2Value">6px</span></label>
-                        <input type="range" id="stroke2" min="0" max="20" value="6">
-                    </div>
-                    <div class="control-group">
-                        <label>Konturfarbe</label>
-                        <input type="color" id="strokeColor2" value="#000000">
-                    </div>
-                    <div class="control-group">
-                        <label>Transparenz <span class="range-value" id="opacity2Value">100%</span></label>
-                        <input type="range" id="opacity2" min="0" max="100" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Rotation <span class="range-value" id="rotation2Value">0°</span></label>
-                        <input type="range" id="rotation2" min="-45" max="45" value="0">
+                        <label>Glow Farbe 2</label>
+                        <input type="color" id="color2" value="#00d4ff">
                     </div>
                 </div>
 
-                <!-- Badge Section -->
+                <!-- Media Section -->
                 <div class="section">
-                    <div class="section-title">🏷️ Badge / Label</div>
+                    <div class="section-title">🖼️ Medien</div>
+                    
+                    <div class="control-group">
+                        <label>Hintergrund (Bild/Video/GIF)</label>
+                        <input type="file" id="bgImage" accept="image/*,video/*,.gif">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Blur-Stärke <span class="range-value" id="blurValue">0px</span></label>
+                        <input type="range" id="blur" min="0" max="20" value="0">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Helligkeit <span class="range-value" id="brightnessValue">40%</span></label>
+                        <input type="range" id="brightness" min="0" max="100" value="40">
+                    </div>
+                    
                     <div class="checkbox-group">
-                        <input type="checkbox" id="showBadge" checked>
-                        <label for="showBadge">Badge anzeigen</label>
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Text</label>
-                        <input type="text" id="badge" value="FREE" maxlength="20">
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Farbe</label>
-                        <input type="color" id="badgeColor" value="#ff0844">
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Position X <span class="range-value" id="badgePosXValue">100</span></label>
-                        <input type="range" id="badgePosX" min="50" max="300" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Position Y <span class="range-value" id="badgePosYValue">100</span></label>
-                        <input type="range" id="badgePosY" min="50" max="300" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Größe <span class="range-value" id="badgeSizeValue">1.0</span></label>
-                        <input type="range" id="badgeSize" min="0.5" max="2" step="0.1" value="1.0">
-                    </div>
-                    <div class="control-group">
-                        <label>Badge Rotation <span class="range-value" id="badgeRotValue">-15°</span></label>
-                        <input type="range" id="badgeRot" min="-45" max="45" value="-15">
-                    </div>
-                </div>
-
-                <!-- Logo Section -->
-                <div class="section">
-                    <div class="section-title">🎨 Logo (Transparent)</div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="showLogo">
+                        <input type="checkbox" id="showLogo" checked>
                         <label for="showLogo">Logo anzeigen</label>
                     </div>
+                    
                     <div class="control-group">
-                        <label>Logo hochladen (PNG transparent empfohlen)</label>
-                        <input type="file" id="logoImage" accept="image/*">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Größe <span class="range-value" id="logoSizeValue">150px</span></label>
-                        <input type="range" id="logoSize" min="50" max="500" value="150">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Position X <span class="range-value" id="logoPosXValue">640</span></label>
-                        <input type="range" id="logoPosX" min="0" max="1280" value="640">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Position Y <span class="range-value" id="logoPosYValue">360</span></label>
-                        <input type="range" id="logoPosY" min="0" max="720" value="360">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Transparenz <span class="range-value" id="logoOpacityValue">80%</span></label>
-                        <input type="range" id="logoOpacity" min="0" max="100" value="80">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Rotation <span class="range-value" id="logoRotValue">0°</span></label>
-                        <input type="range" id="logoRot" min="-180" max="180" value="0">
-                    </div>
-                </div>
-
-                <!-- BPM & Info Section -->
-                <div class="section">
-                    <div class="section-title">ℹ️ Beat Info</div>
-                    <div class="control-group">
-                        <label>BPM</label>
-                        <input type="number" id="bpm" value="140" min="60" max="200">
-                    </div>
-                    <div class="control-group">
-                        <label>Zusatztext (unten rechts)</label>
-                        <input type="text" id="infoText" value="Prod. by WIB" maxlength="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Zusatztext Größe <span class="range-value" id="infoSizeValue">24px</span></label>
-                        <input type="range" id="infoSize" min="12" max="50" value="24">
-                    </div>
-                    <div class="control-group">
-                        <label>Zusatztext Farbe</label>
-                        <input type="color" id="infoColor" value="#ffffff">
-                    </div>
-                </div>
-
-                <!-- Animation Section -->
-                <div class="section">
-                    <div class="section-title">🎬 Animation</div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="enableReactive">
-                        <label for="enableReactive">Audio-reaktive Animation</label>
-                    </div>
-                    <div class="control-group">
-                        <label>Puls-Stärke <span class="range-value" id="pulseValue">20</span></label>
-                        <input type="range" id="pulseStrength" min="0" max="50" value="20">
+                        <label>Eigenes Logo</label>
+                        <input type="file" id="logoFile" accept="image/*">
                     </div>
                 </div>
 
                 <!-- Audio Section -->
                 <div class="section">
-                    <div class="section-title">🎵 Audio</div>
+                    <div class="section-title">🎵 Audio & Effekte</div>
+                    
                     <div class="control-group">
-                        <label>Audio hochladen (MP3, WAV)</label>
+                        <label>Musik hochladen (.mp3, .wav)</label>
                         <input type="file" id="audioFile" accept="audio/*">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="enableReactive">
+                        <label for="enableReactive">Audio-Reaktive Effekte aktivieren</label>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Reaktions-Intensität <span class="range-value" id="intensityValue">50%</span></label>
+                        <input type="range" id="intensity" min="0" max="100" value="50">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Text-Effekt</label>
+                        <select id="effectType">
+                            <option value="pulse">Puls (Text)</option>
+                            <option value="glow">Glow-Explosion</option>
+                            <option value="shake">Shake</option>
+                            <option value="scale">Größen-Puls</option>
+                            <option value="all">Alle kombiniert</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Visuelle Effekte</label>
+                        <select id="visualEffect">
+                            <option value="none">Keine</option>
+                            <option value="particles">Partikel</option>
+                            <option value="waves">Wellen</option>
+                            <option value="lightning">Blitze</option>
+                            <option value="fire">Feuer-Partikel</option>
+                            <option value="all">Alle kombiniert</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Partikel-Anzahl <span class="range-value" id="particleCountValue">50</span></label>
+                        <input type="range" id="particleCount" min="10" max="200" value="50">
+                    </div>
+                </div>
+
+                <!-- Other Settings -->
+                <div class="section">
+                    <div class="section-title">⚙️ Weitere Einstellungen</div>
+                    
+                    <div class="control-group">
+                        <label>Badge Text</label>
+                        <input type="text" id="badge" value="FREE" maxlength="10">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Badge Text Farbe</label>
+                        <input type="color" id="badgeColor" value="#ffffff">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>BPM</label>
+                        <input type="number" id="bpm" value="140" min="60" max="200">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>BPM Text Farbe</label>
+                        <input type="color" id="bpmTextColor" value="#ffffff">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>BPM Glow Farbe</label>
+                        <input type="color" id="bpmColor" value="#ff0844">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Jahr</label>
+                        <input type="number" id="year" value="2025" min="2020" max="2030">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Jahr Text Farbe</label>
+                        <input type="color" id="yearTextColor" value="#ffffff">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Jahr Glow Farbe</label>
+                        <input type="color" id="yearColor" value="#00d4ff">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Producer Name (PROD BY ...)</label>
+                        <input type="text" id="producerName" value="" placeholder="Dein Name" maxlength="20">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Producer Text Farbe</label>
+                        <input type="color" id="producerTextColor" value="#ffffff">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Producer Glow Farbe</label>
+                        <input type="color" id="producerColor" value="#00d4ff">
                     </div>
                 </div>
 
                 <!-- Presets -->
                 <div class="section">
-                    <div class="section-title">🎨 Vorlagen</div>
+                    <div class="section-title">🎨 Presets</div>
                     <div class="preset-grid">
-                        <button class="preset-btn" onclick="applyPreset('drill')">Drill</button>
-                        <button class="preset-btn" onclick="applyPreset('trap')">Trap</button>
-                        <button class="preset-btn" onclick="applyPreset('melodic')">Melodic</button>
-                        <button class="preset-btn" onclick="applyPreset('aggressive')">Hard</button>
-                        <button class="preset-btn" onclick="applyPreset('balkan')">Balkan</button>
-                        <button class="preset-btn" onclick="applyPreset('dark')">Dark</button>
+                        <button class="preset-btn" onclick="applyPreset('drill')">🔥 Drill</button>
+                        <button class="preset-btn" onclick="applyPreset('trap')">💎 Trap</button>
+                        <button class="preset-btn" onclick="applyPreset('melodic')">🌙 Melodic</button>
+                        <button class="preset-btn" onclick="applyPreset('aggressive')">⚡ Aggressive</button>
+                        <button class="preset-btn" onclick="applyPreset('balkan')">🇷🇸 Balkan</button>
+                        <button class="preset-btn" onclick="applyPreset('dark')">🖤 Dark</button>
                     </div>
                 </div>
 
-                <!-- Export Actions -->
+                <!-- Actions -->
                 <div class="section">
-                    <button class="action-btn" onclick="downloadImage()">💾 Als PNG speichern</button>
-                    <button class="action-btn secondary" id="recordBtn" onclick="recordVideo()">🎬 Video aufnehmen (Echtzeit)</button>
-                    <p style="font-size: 11px; color: #999; margin-top: 8px; line-height: 1.4;">
-                        💡 Klick → Audio spielt ab → Wird aufgenommen → Automatischer Download<br>
-                        ⚡ Dauert nur so lange wie das Audio!
-                    </p>
+                    <div class="section-title">💾 Export</div>
+                    <button class="action-btn" onclick="downloadImage()">📸 Als PNG speichern</button>
+                    <button class="action-btn secondary" onclick="recordVideo()" id="recordBtn">🎬 Als MP4 aufnehmen (mit Audio)</button>
+                    <div id="statusMsg" class="status-message" style="display: none;"></div>
+                </div>
+
+                <!-- Tips -->
+                <div class="tips">
+                    <h4>💡 Tipps</h4>
+                    <ul>
+                        <li>Video/GIF Hintergründe für dynamische Effekte</li>
+                        <li>Musik hochladen für Bass-reaktive Effekte</li>
+                        <li>MP4 nimmt Audio + Video auf</li>
+                        <li>Verschiedene Fonts für unique Styles</li>
+                        <li>Jahr ist editierbar für zeitlose Designs</li>
+                        <li>"Alle kombiniert" Effekt = Maximum Impact! 🔥</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Canvas Section -->
+            <!-- Canvas Display -->
             <div class="canvas-container">
                 <canvas id="renderCanvas" width="1280" height="720"></canvas>
                 
-                <div class="audio-controls">
+                <div class="audio-controls" id="audioControls" style="display: none;">
                     <button class="play-btn" id="playBtn" onclick="toggleAudio()">▶</button>
-                    <div class="audio-time" id="audioTime">0:00 / 0:00</div>
+                    <div class="audio-time">
+                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                    </div>
                 </div>
-
-                <div class="status-message" id="statusMsg"></div>
             </div>
         </div>
     </div>
 
+    <audio id="audioElement" style="display: none;"></audio>
+
     <script>
-        // Canvas Setup
+        // Canvas setup
         const canvas = document.getElementById('renderCanvas');
         const ctx = canvas.getContext('2d');
-
-        // State
-        const state = {
-            // Background
-            backgroundImage: null,
-            bgBrightness: 100,
-            bgBlur: 0,
-            bgScale: 100,
-            bgPosX: 50,
-            bgPosY: 50,
-            bgOverlay: 30,
-            
-            // Text 1
-            text1: 'DRILL',
-            font1: 'Bebas Neue',
-            textColor1: '#ffffff',
-            fontSize1: 120,
-            textPosY1: 200,
-            letterSpacing1: 20,
-            stroke1: 6,
-            strokeColor1: '#000000',
-            opacity1: 100,
-            rotation1: 0,
-            
-            // Text 2
-            text2: 'BALKAN',
-            font2: 'Bebas Neue',
-            textColor2: '#ffffff',
-            fontSize2: 120,
-            textPosY2: 520,
-            letterSpacing2: 20,
-            stroke2: 6,
-            strokeColor2: '#000000',
-            opacity2: 100,
-            rotation2: 0,
-            
-            // Badge
-            showBadge: true,
-            badge: 'FREE',
-            badgeColor: '#ff0844',
-            badgePosX: 100,
-            badgePosY: 100,
-            badgeSize: 1.0,
-            badgeRot: -15,
-            
-            // Logo
-            showLogo: false,
-            logoImage: null,
-            logoSize: 150,
-            logoPosX: 640,
-            logoPosY: 360,
-            logoOpacity: 80,
-            logoRot: 0,
-            
-            // Info
-            bpm: 140,
-            infoText: 'Prod. by WIB',
-            infoSize: 24,
-            infoColor: '#ffffff',
-            
-            // Animation
-            enableReactive: false,
-            pulseStrength: 20
-        };
-
-        // Audio
-        const audioElement = new Audio();
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const analyser = audioContext.createAnalyser();
-        analyser.fftSize = 256;
-        const bufferLength = analyser.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-
+        
+        // Audio setup
+        const audioElement = document.getElementById('audioElement');
+        let audioContext = null;
+        let analyser = null;
+        let bufferLength = 0;
+        let dataArray = null;
+        
         let audioSource = null;
         let isPlaying = false;
-        let animationId = null;
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let audioInitialized = false;
+        
+        // State
+        const state = {
+            text1: 'DRILL',
+            text2: 'BALKAN',
+            font1: "'Anton', sans-serif",
+            font2: "'Anton', sans-serif",
+            textColor1: '#ffffff',
+            textColor2: '#ffffff',
+            color1: '#ff0844',
+            color2: '#00d4ff',
+            badge: 'FREE',
+            badgeColor: '#ffffff',
+            bpm: 140,
+            bpmTextColor: '#ffffff',
+            bpmColor: '#ff0844',
+            bpmBgColor: 'rgba(0, 0, 0, 0.7)',
+            year: 2025,
+            yearTextColor: '#ffffff',
+            yearColor: '#00d4ff',
+            yearBgColor: 'rgba(0, 0, 0, 0.7)',
+            producerName: '',
+            producerTextColor: '#ffffff',
+            producerColor: '#00d4ff',
+            producerBgColor: 'rgba(0, 0, 0, 0.7)',
+            blur: 0,
+            brightness: 40,
+            bgImage: null,
+            bgVideo: null,
+            logo: null,
+            showLogo: true,
+            enableReactive: false,
+            intensity: 50,
+            effectType: 'pulse',
+            visualEffect: 'none',
+            particleCount: 50
+        };
+
+        // Particle system
+        let particles = [];
+        
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 5;
+                this.vy = (Math.random() - 0.5) * 5;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.005;
+                this.size = Math.random() * 4 + 2;
+                this.color = color;
+            }
+            
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1; // Gravity
+                this.life -= this.decay;
+            }
+            
+            draw(ctx) {
+                ctx.save();
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Load default logo
+        const defaultLogo = new Image();
+        defaultLogo.src = '/mnt/user-data/uploads/logo_wei.png';
+        defaultLogo.onload = () => {
+            state.logo = defaultLogo;
+            render();
+        };
 
         // Event Listeners
-        document.getElementById('backgroundImage').addEventListener('change', handleBackgroundUpload);
-        document.getElementById('logoImage').addEventListener('change', handleLogoUpload);
-        document.getElementById('audioFile').addEventListener('change', handleAudioUpload);
-
-        // Background controls
-        document.getElementById('bgBrightness').addEventListener('input', (e) => {
-            state.bgBrightness = parseInt(e.target.value);
-            document.getElementById('bgBrightnessValue').textContent = state.bgBrightness + '%';
-            render();
-        });
-        document.getElementById('bgBlur').addEventListener('input', (e) => {
-            state.bgBlur = parseInt(e.target.value);
-            document.getElementById('bgBlurValue').textContent = state.bgBlur + 'px';
-            render();
-        });
-        document.getElementById('bgScale').addEventListener('input', (e) => {
-            state.bgScale = parseInt(e.target.value);
-            document.getElementById('bgScaleValue').textContent = state.bgScale + '%';
-            render();
-        });
-        document.getElementById('bgPosX').addEventListener('input', (e) => {
-            state.bgPosX = parseInt(e.target.value);
-            document.getElementById('bgPosXValue').textContent = state.bgPosX + '%';
-            render();
-        });
-        document.getElementById('bgPosY').addEventListener('input', (e) => {
-            state.bgPosY = parseInt(e.target.value);
-            document.getElementById('bgPosYValue').textContent = state.bgPosY + '%';
-            render();
-        });
-        document.getElementById('bgOverlay').addEventListener('input', (e) => {
-            state.bgOverlay = parseInt(e.target.value);
-            document.getElementById('bgOverlayValue').textContent = state.bgOverlay + '%';
-            render();
-        });
-
-        // Text 1 controls
         document.getElementById('text1').addEventListener('input', (e) => {
             state.text1 = e.target.value.toUpperCase();
             render();
         });
-        document.getElementById('font1').addEventListener('change', (e) => {
-            state.font1 = e.target.value;
-            render();
-        });
-        document.getElementById('textColor1').addEventListener('input', (e) => {
-            state.textColor1 = e.target.value;
-            render();
-        });
-        document.getElementById('fontSize1').addEventListener('input', (e) => {
-            state.fontSize1 = parseInt(e.target.value);
-            document.getElementById('fontSize1Value').textContent = state.fontSize1 + 'px';
-            render();
-        });
-        document.getElementById('textPosY1').addEventListener('input', (e) => {
-            state.textPosY1 = parseInt(e.target.value);
-            document.getElementById('textPosY1Value').textContent = state.textPosY1;
-            render();
-        });
-        document.getElementById('letterSpacing1').addEventListener('input', (e) => {
-            state.letterSpacing1 = parseInt(e.target.value);
-            document.getElementById('letterSpacing1Value').textContent = state.letterSpacing1 + 'px';
-            render();
-        });
-        document.getElementById('stroke1').addEventListener('input', (e) => {
-            state.stroke1 = parseInt(e.target.value);
-            document.getElementById('stroke1Value').textContent = state.stroke1 + 'px';
-            render();
-        });
-        document.getElementById('strokeColor1').addEventListener('input', (e) => {
-            state.strokeColor1 = e.target.value;
-            render();
-        });
-        document.getElementById('opacity1').addEventListener('input', (e) => {
-            state.opacity1 = parseInt(e.target.value);
-            document.getElementById('opacity1Value').textContent = state.opacity1 + '%';
-            render();
-        });
-        document.getElementById('rotation1').addEventListener('input', (e) => {
-            state.rotation1 = parseInt(e.target.value);
-            document.getElementById('rotation1Value').textContent = state.rotation1 + '°';
-            render();
-        });
 
-        // Text 2 controls
         document.getElementById('text2').addEventListener('input', (e) => {
             state.text2 = e.target.value.toUpperCase();
             render();
         });
+
+        document.getElementById('font1').addEventListener('change', (e) => {
+            state.font1 = e.target.value;
+            render();
+        });
+
         document.getElementById('font2').addEventListener('change', (e) => {
             state.font2 = e.target.value;
             render();
         });
+
+        document.getElementById('textColor1').addEventListener('input', (e) => {
+            state.textColor1 = e.target.value;
+            render();
+        });
+
         document.getElementById('textColor2').addEventListener('input', (e) => {
             state.textColor2 = e.target.value;
             render();
         });
-        document.getElementById('fontSize2').addEventListener('input', (e) => {
-            state.fontSize2 = parseInt(e.target.value);
-            document.getElementById('fontSize2Value').textContent = state.fontSize2 + 'px';
-            render();
-        });
-        document.getElementById('textPosY2').addEventListener('input', (e) => {
-            state.textPosY2 = parseInt(e.target.value);
-            document.getElementById('textPosY2Value').textContent = state.textPosY2;
-            render();
-        });
-        document.getElementById('letterSpacing2').addEventListener('input', (e) => {
-            state.letterSpacing2 = parseInt(e.target.value);
-            document.getElementById('letterSpacing2Value').textContent = state.letterSpacing2 + 'px';
-            render();
-        });
-        document.getElementById('stroke2').addEventListener('input', (e) => {
-            state.stroke2 = parseInt(e.target.value);
-            document.getElementById('stroke2Value').textContent = state.stroke2 + 'px';
-            render();
-        });
-        document.getElementById('strokeColor2').addEventListener('input', (e) => {
-            state.strokeColor2 = e.target.value;
-            render();
-        });
-        document.getElementById('opacity2').addEventListener('input', (e) => {
-            state.opacity2 = parseInt(e.target.value);
-            document.getElementById('opacity2Value').textContent = state.opacity2 + '%';
-            render();
-        });
-        document.getElementById('rotation2').addEventListener('input', (e) => {
-            state.rotation2 = parseInt(e.target.value);
-            document.getElementById('rotation2Value').textContent = state.rotation2 + '°';
+
+        document.getElementById('color1').addEventListener('input', (e) => {
+            state.color1 = e.target.value;
             render();
         });
 
-        // Badge controls
-        document.getElementById('showBadge').addEventListener('change', (e) => {
-            state.showBadge = e.target.checked;
+        document.getElementById('color2').addEventListener('input', (e) => {
+            state.color2 = e.target.value;
             render();
         });
+
         document.getElementById('badge').addEventListener('input', (e) => {
             state.badge = e.target.value.toUpperCase();
             render();
         });
+
         document.getElementById('badgeColor').addEventListener('input', (e) => {
             state.badgeColor = e.target.value;
             render();
         });
-        document.getElementById('badgePosX').addEventListener('input', (e) => {
-            state.badgePosX = parseInt(e.target.value);
-            document.getElementById('badgePosXValue').textContent = state.badgePosX;
-            render();
-        });
-        document.getElementById('badgePosY').addEventListener('input', (e) => {
-            state.badgePosY = parseInt(e.target.value);
-            document.getElementById('badgePosYValue').textContent = state.badgePosY;
-            render();
-        });
-        document.getElementById('badgeSize').addEventListener('input', (e) => {
-            state.badgeSize = parseFloat(e.target.value);
-            document.getElementById('badgeSizeValue').textContent = state.badgeSize.toFixed(1);
-            render();
-        });
-        document.getElementById('badgeRot').addEventListener('input', (e) => {
-            state.badgeRot = parseInt(e.target.value);
-            document.getElementById('badgeRotValue').textContent = state.badgeRot + '°';
+
+        document.getElementById('bpm').addEventListener('input', (e) => {
+            state.bpm = e.target.value;
             render();
         });
 
-        // Logo controls
+        document.getElementById('bpmTextColor').addEventListener('input', (e) => {
+            state.bpmTextColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('bpmColor').addEventListener('input', (e) => {
+            state.bpmColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('year').addEventListener('input', (e) => {
+            state.year = e.target.value;
+            render();
+        });
+
+        document.getElementById('yearTextColor').addEventListener('input', (e) => {
+            state.yearTextColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('yearColor').addEventListener('input', (e) => {
+            state.yearColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('producerName').addEventListener('input', (e) => {
+            state.producerName = e.target.value;
+            render();
+        });
+
+        document.getElementById('producerTextColor').addEventListener('input', (e) => {
+            state.producerTextColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('producerColor').addEventListener('input', (e) => {
+            state.producerColor = e.target.value;
+            render();
+        });
+
+        document.getElementById('blur').addEventListener('input', (e) => {
+            state.blur = e.target.value;
+            document.getElementById('blurValue').textContent = e.target.value + 'px';
+            render();
+        });
+
+        document.getElementById('brightness').addEventListener('input', (e) => {
+            state.brightness = e.target.value;
+            document.getElementById('brightnessValue').textContent = e.target.value + '%';
+            render();
+        });
+
         document.getElementById('showLogo').addEventListener('change', (e) => {
             state.showLogo = e.target.checked;
             render();
         });
-        document.getElementById('logoSize').addEventListener('input', (e) => {
-            state.logoSize = parseInt(e.target.value);
-            document.getElementById('logoSizeValue').textContent = state.logoSize + 'px';
-            render();
-        });
-        document.getElementById('logoPosX').addEventListener('input', (e) => {
-            state.logoPosX = parseInt(e.target.value);
-            document.getElementById('logoPosXValue').textContent = state.logoPosX;
-            render();
-        });
-        document.getElementById('logoPosY').addEventListener('input', (e) => {
-            state.logoPosY = parseInt(e.target.value);
-            document.getElementById('logoPosYValue').textContent = state.logoPosY;
-            render();
-        });
-        document.getElementById('logoOpacity').addEventListener('input', (e) => {
-            state.logoOpacity = parseInt(e.target.value);
-            document.getElementById('logoOpacityValue').textContent = state.logoOpacity + '%';
-            render();
-        });
-        document.getElementById('logoRot').addEventListener('input', (e) => {
-            state.logoRot = parseInt(e.target.value);
-            document.getElementById('logoRotValue').textContent = state.logoRot + '°';
-            render();
-        });
 
-        // Info controls
-        document.getElementById('bpm').addEventListener('input', (e) => {
-            state.bpm = parseInt(e.target.value);
-            render();
-        });
-        document.getElementById('infoText').addEventListener('input', (e) => {
-            state.infoText = e.target.value;
-            render();
-        });
-        document.getElementById('infoSize').addEventListener('input', (e) => {
-            state.infoSize = parseInt(e.target.value);
-            document.getElementById('infoSizeValue').textContent = state.infoSize + 'px';
-            render();
-        });
-        document.getElementById('infoColor').addEventListener('input', (e) => {
-            state.infoColor = e.target.value;
-            render();
-        });
-
-        // Animation controls
         document.getElementById('enableReactive').addEventListener('change', (e) => {
             state.enableReactive = e.target.checked;
-            if (state.enableReactive && isPlaying) {
+        });
+
+        document.getElementById('intensity').addEventListener('input', (e) => {
+            state.intensity = e.target.value;
+            document.getElementById('intensityValue').textContent = e.target.value + '%';
+        });
+
+        document.getElementById('effectType').addEventListener('change', (e) => {
+            state.effectType = e.target.value;
+        });
+
+        document.getElementById('visualEffect').addEventListener('change', (e) => {
+            state.visualEffect = e.target.value;
+            // Start rendering if visual effect is enabled
+            if (state.visualEffect !== 'none' && !animationId) {
                 render();
             }
         });
-        document.getElementById('pulseStrength').addEventListener('input', (e) => {
-            state.pulseStrength = parseInt(e.target.value);
-            document.getElementById('pulseValue').textContent = state.pulseStrength;
+
+        document.getElementById('particleCount').addEventListener('input', (e) => {
+            state.particleCount = e.target.value;
+            document.getElementById('particleCountValue').textContent = e.target.value;
         });
 
-        // File handlers
-        function handleBackgroundUpload(e) {
+        document.getElementById('bgImage').addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const img = new Image();
-                img.onload = () => {
-                    state.backgroundImage = img;
-                    render();
-                    showStatus('✅ Hintergrundbild geladen!');
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function handleLogoUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const img = new Image();
-                img.onload = () => {
-                    state.logoImage = img;
-                    state.showLogo = true;
-                    document.getElementById('showLogo').checked = true;
-                    render();
-                    showStatus('✅ Logo geladen!');
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function handleAudioUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            const url = URL.createObjectURL(file);
-            audioElement.src = url;
-
-            if (audioSource) {
-                audioSource.disconnect();
+            if (file) {
+                const fileType = file.type;
+                
+                // Reset previous media
+                state.bgImage = null;
+                state.bgVideo = null;
+                
+                if (fileType.startsWith('video/') || file.name.toLowerCase().endsWith('.gif')) {
+                    // Handle video or GIF
+                    const video = document.createElement('video');
+                    video.muted = true;
+                    video.loop = true;
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    
+                    const url = URL.createObjectURL(file);
+                    video.src = url;
+                    
+                    video.onloadeddata = () => {
+                        state.bgVideo = video;
+                        video.play();
+                        render();
+                        showStatus('✅ Video/GIF Hintergrund geladen!');
+                    };
+                } else {
+                    // Handle image
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            state.bgImage = img;
+                            render();
+                            showStatus('✅ Bild Hintergrund geladen!');
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
             }
+        });
 
-            audioSource = audioContext.createMediaElementSource(audioElement);
-            audioSource.connect(analyser);
-            analyser.connect(audioContext.destination);
+        document.getElementById('logoFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        state.logo = img;
+                        render();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
-            audioElement.addEventListener('timeupdate', updateTime);
-            audioElement.addEventListener('loadedmetadata', updateTime);
-
-            showStatus('✅ Audio geladen!');
-        }
-
-        function updateTime() {
-            const current = formatTime(audioElement.currentTime);
-            const duration = formatTime(audioElement.duration || 0);
-            document.getElementById('audioTime').textContent = `${current} / ${duration}`;
-        }
+        document.getElementById('audioFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            try {
+                // Create new audio context if not exists
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    analyser = audioContext.createAnalyser();
+                    analyser.fftSize = 256;
+                    bufferLength = analyser.frequencyBinCount;
+                    dataArray = new Uint8Array(bufferLength);
+                }
+                
+                // Reset audio element
+                audioElement.pause();
+                audioElement.currentTime = 0;
+                isPlaying = false;
+                document.getElementById('playBtn').textContent = '▶';
+                
+                // Create URL and load
+                const url = URL.createObjectURL(file);
+                audioElement.src = url;
+                
+                // Wait for load
+                await new Promise((resolve, reject) => {
+                    audioElement.onloadedmetadata = resolve;
+                    audioElement.onerror = reject;
+                });
+                
+                // Setup audio source only once
+                if (!audioInitialized) {
+                    audioSource = audioContext.createMediaElementSource(audioElement);
+                    audioSource.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                    audioInitialized = true;
+                }
+                
+                // Show controls
+                document.getElementById('audioControls').style.display = 'flex';
+                document.getElementById('duration').textContent = formatTime(audioElement.duration);
+                document.getElementById('currentTime').textContent = '0:00';
+                
+                // Time update handler
+                audioElement.ontimeupdate = () => {
+                    document.getElementById('currentTime').textContent = formatTime(audioElement.currentTime);
+                };
+                
+                // Ended handler
+                audioElement.onended = () => {
+                    isPlaying = false;
+                    document.getElementById('playBtn').textContent = '▶';
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                    render();
+                };
+                
+                showStatus('✅ Audio geladen! Drücke Play zum Abspielen');
+                
+            } catch (error) {
+                console.error('Audio load error:', error);
+                showStatus('❌ Fehler beim Laden der Audio-Datei. Bitte versuche eine andere Datei.');
+            }
+        });
 
         // Render function
-        function render() {
+        let animationId = null;
+        let lastFrameTime = 0;
+        const targetFPS = 30; // Lower FPS for better performance
+        const frameDelay = 1000 / targetFPS;
+        
+        function render(timestamp) {
+            // Handle initial call without timestamp
+            if (!timestamp) timestamp = performance.now();
+            
+            // Throttle to target FPS
+            if (timestamp - lastFrameTime < frameDelay) {
+                if ((state.enableReactive && isPlaying) || state.bgVideo || state.visualEffect !== 'none') {
+                    animationId = requestAnimationFrame(render);
+                }
+                return;
+            }
+            lastFrameTime = timestamp;
             // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Get audio data if reactive
-            let bassLevel = 0;
-            if (state.enableReactive && isPlaying) {
-                analyser.getByteFrequencyData(dataArray);
-                const bass = dataArray.slice(0, 10);
-                bassLevel = bass.reduce((a, b) => a + b, 0) / bass.length / 255;
-            }
-
-            // Draw background
-            if (state.backgroundImage) {
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Background image or video
+            const bgSource = state.bgVideo || state.bgImage;
+            if (bgSource) {
                 ctx.save();
-                
-                // Apply filters
-                let filterString = '';
-                if (state.bgBrightness !== 100) {
-                    filterString += `brightness(${state.bgBrightness}%)`;
-                }
-                if (state.bgBlur > 0) {
-                    filterString += ` blur(${state.bgBlur}px)`;
-                }
-                if (filterString) {
-                    ctx.filter = filterString;
-                }
+                const brightnessValue = state.brightness / 100;
+              const safeBlur = Math.min(state.blur, 5);
+ctx.filter = `blur(${safeBlur}px) brightness(${brightnessValue})`;
 
-                // Calculate scale and position
-                const scale = state.bgScale / 100;
-                const imgWidth = state.backgroundImage.width;
-                const imgHeight = state.backgroundImage.height;
-                const canvasRatio = canvas.width / canvas.height;
-                const imgRatio = imgWidth / imgHeight;
-
-                let drawWidth, drawHeight;
-                if (imgRatio > canvasRatio) {
-                    drawHeight = canvas.height * scale;
-                    drawWidth = drawHeight * imgRatio;
+                   
                 } else {
-                    drawWidth = canvas.width * scale;
-                    drawHeight = drawWidth / imgRatio;
+                    ctx.filter = `brightness(${brightnessValue})`;
                 }
-
-                const offsetX = (canvas.width - drawWidth) * (state.bgPosX / 100);
-                const offsetY = (canvas.height - drawHeight) * (state.bgPosY / 100);
-
-                ctx.drawImage(state.backgroundImage, offsetX, offsetY, drawWidth, drawHeight);
                 
-                ctx.filter = 'none';
-                ctx.restore();
-
-                // Overlay
-                if (state.bgOverlay > 0) {
-                    ctx.fillStyle = `rgba(0, 0, 0, ${state.bgOverlay / 100})`;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                let sourceWidth, sourceHeight;
+                if (state.bgVideo) {
+                    sourceWidth = state.bgVideo.videoWidth;
+                    sourceHeight = state.bgVideo.videoHeight;
+                } else {
+                    sourceWidth = state.bgImage.width;
+                    sourceHeight = state.bgImage.height;
                 }
-            } else {
-                // Default gradient background
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, '#1a1a1a');
-                gradient.addColorStop(1, '#0a0a0a');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                const imgRatio = sourceWidth / sourceHeight;
+                const canvasRatio = canvas.width / canvas.height;
+                let drawWidth, drawHeight, offsetX, offsetY;
+                
+                if (imgRatio > canvasRatio) {
+                    drawHeight = canvas.height;
+                    drawWidth = drawHeight * imgRatio;
+                    offsetX = (canvas.width - drawWidth) / 2;
+                    offsetY = 0;
+                } else {
+                    drawWidth = canvas.width;
+                    drawHeight = drawWidth / imgRatio;
+                    offsetX = 0;
+                    offsetY = (canvas.height - drawHeight) / 2;
+                }
+                
+                ctx.drawImage(bgSource, offsetX, offsetY, drawWidth, drawHeight);
+                ctx.restore();
             }
-
-            // Draw Text 1 with animation
-            drawText(
-                state.text1,
-                state.font1,
-                state.fontSize1,
-                state.textColor1,
-                state.textPosY1,
-                state.letterSpacing1,
-                state.stroke1,
-                state.strokeColor1,
-                state.opacity1,
-                state.rotation1,
-                bassLevel
-            );
-
-            // Draw Text 2 with animation
-            drawText(
-                state.text2,
-                state.font2,
-                state.fontSize2,
-                state.textColor2,
-                state.textPosY2,
-                state.letterSpacing2,
-                state.stroke2,
-                state.strokeColor2,
-                state.opacity2,
-                state.rotation2,
-                bassLevel
-            );
-
-            // Draw Badge (NO animation)
-            if (state.showBadge && state.badge) {
-                drawBadge(0); // Pass 0 to disable animation
+            
+            // Gradient overlay
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, state.color1 + '40');
+            gradient.addColorStop(1, '#00000080');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Get audio data for reactive effects with improved bass detection
+            let audioLevel = 0;
+            let bassLevel = 0;
+            if (state.enableReactive && isPlaying && analyser && dataArray) {
+                analyser.getByteFrequencyData(dataArray);
+                
+                // Get bass frequencies (lower range for kicks/bass)
+                const bassRange = Math.floor(bufferLength * 0.15); // First 15% for bass
+                const bassData = Array.from(dataArray.slice(0, bassRange));
+                const bassAverage = bassData.reduce((a, b) => a + b) / bassRange;
+                bassLevel = (bassAverage / 255) * (state.intensity / 100) * 1.5;
+                
+                // Get overall level
+                const average = dataArray.reduce((a, b) => a + b) / bufferLength;
+                audioLevel = (average / 255) * (state.intensity / 100);
             }
-
-            // Draw Logo (NO animation)
-            if (state.showLogo && state.logoImage) {
-                drawLogo();
+            
+            // Glowing orbs with bass reactivity
+            drawOrb(100, 100, 400 + bassLevel * 200, state.color1, 0.4 + bassLevel * 0.4);
+            drawOrb(1180, 620, 350 + bassLevel * 150, state.color2, 0.4 + bassLevel * 0.4);
+            
+            // Visual Effects
+            if (state.visualEffect !== 'none') {
+                drawVisualEffects(bassLevel, audioLevel);
             }
-
-            // Draw Info (NO animation)
-            drawInfo();
-
-            // Continue animation
-            if (state.enableReactive && isPlaying) {
+            
+            // Update and draw particles (optimized)
+            if (state.visualEffect === 'particles' || state.visualEffect === 'fire' || state.visualEffect === 'all') {
+                // Create new particles based on bass (limited)
+                if (bassLevel > 0.3 && particles.length < state.particleCount) {
+                    const particlesToCreate = Math.min(Math.floor(bassLevel * 5), 10); // Max 10 per frame
+                    for (let i = 0; i < particlesToCreate; i++) {
+                        const x = canvas.width / 2 + (Math.random() - 0.5) * 400;
+                        const y = canvas.height / 2 + (Math.random() - 0.5) * 200;
+                        const color = Math.random() > 0.5 ? state.color1 : state.color2;
+                        particles.push(new Particle(x, y, color));
+                    }
+                }
+                
+                // Update and draw particles (batch operations)
+                particles = particles.filter(p => p.life > 0);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw(ctx);
+                });
+            }
+            
+            // Main text with improved bass reactivity
+            let text1Size = 140;
+            let text1Y = 280;
+            let text1X = canvas.width / 2;
+            
+            if (state.enableReactive && bassLevel > 0) {
+                if (state.effectType === 'scale' || state.effectType === 'all') {
+                    text1Size += bassLevel * 60; // Bigger scale
+                }
+                if (state.effectType === 'shake' || state.effectType === 'all') {
+                    text1X += (Math.random() - 0.5) * bassLevel * 50;
+                    text1Y += (Math.random() - 0.5) * bassLevel * 50;
+                }
+            }
+            
+            ctx.save();
+            ctx.font = `900 ${text1Size}px ${state.font1}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Text shadow with audio reactive glow
+            const glowIntensity = state.enableReactive ? (40 + bassLevel * 100) : 40;
+            ctx.shadowColor = state.color1;
+            ctx.shadowBlur = glowIntensity;
+            ctx.fillStyle = state.textColor1;
+            ctx.fillText(state.text1, text1X, text1Y);
+            
+            // Additional glow layer
+            if (state.effectType === 'glow' || state.effectType === 'all') {
+                ctx.shadowBlur = glowIntensity * 2;
+                ctx.globalAlpha = 0.5 + bassLevel * 0.8;
+                ctx.fillText(state.text1, text1X, text1Y);
+            }
+            ctx.restore();
+            
+            // Subtext with improved bass reactivity
+            let text2Size = 80;
+            let text2Y = 420;
+            let text2X = canvas.width / 2;
+            
+            if (state.enableReactive && bassLevel > 0) {
+                if (state.effectType === 'scale' || state.effectType === 'all') {
+                    text2Size += bassLevel * 45;
+                }
+                if (state.effectType === 'shake' || state.effectType === 'all') {
+                    text2X += (Math.random() - 0.5) * bassLevel * 40;
+                    text2Y += (Math.random() - 0.5) * bassLevel * 40;
+                }
+            }
+            
+            ctx.save();
+            ctx.font = `900 ${text2Size}px ${state.font2}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            const textGradient = ctx.createLinearGradient(0, text2Y - 50, 0, text2Y + 50);
+            textGradient.addColorStop(0, state.color1);
+            textGradient.addColorStop(1, state.color2);
+            ctx.fillStyle = state.textColor2;
+            ctx.shadowColor = state.color2;
+            ctx.shadowBlur = 30 + bassLevel * 60;
+            ctx.fillText(state.text2, text2X, text2Y);
+            ctx.restore();
+            
+            // Logo
+            if (state.showLogo && state.logo) {
+                ctx.save();
+                const logoSize = 180;
+                const logoPadding = 40;
+                
+                // Logo background
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                ctx.fillRect(logoPadding, canvas.height - logoSize - logoPadding, logoSize, logoSize);
+                
+                // Logo image
+                const logoMargin = 20;
+                ctx.drawImage(state.logo, 
+                    logoPadding + logoMargin, 
+                    canvas.height - logoSize - logoPadding + logoMargin, 
+                    logoSize - logoMargin * 2, 
+                    logoSize - logoMargin * 2
+                );
+                ctx.restore();
+            }
+            
+            // Badge (top right, higher position)
+            ctx.save();
+            ctx.translate(1100, 50);
+            ctx.rotate(-5 * Math.PI / 180);
+            
+            const badgeGradient = ctx.createLinearGradient(0, 0, 0, 60);
+            badgeGradient.addColorStop(0, state.color1);
+            badgeGradient.addColorStop(1, state.color2);
+            ctx.fillStyle = badgeGradient;
+            ctx.shadowColor = state.color1;
+            ctx.shadowBlur = 30;
+            ctx.fillRect(-80, -30, 160, 60);
+            
+            ctx.font = "900 42px 'Anton', sans-serif";
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = state.badgeColor || '#ffffff';
+            ctx.shadowBlur = 0;
+            ctx.fillText(state.badge, 0, 0);
+            ctx.restore();
+            
+            // Year (top left corner, separate)
+            ctx.save();
+            ctx.font = "900 48px 'Anton', sans-serif";
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            
+            ctx.fillStyle = state.yearBgColor || 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(40, 40, 140, 60);
+            
+            ctx.shadowColor = state.yearColor || state.color2;
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = state.yearTextColor || '#ffffff';
+            ctx.fillText(state.year, 60, 55);
+            ctx.restore();
+            
+            // BPM and Year
+            ctx.save();
+            ctx.font = "900 36px 'Anton', sans-serif";
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = state.color1;
+            ctx.shadowBlur = 15;
+            
+            // BPM (bottom right)
+            ctx.save();
+            ctx.font = "900 36px 'Anton', sans-serif";
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'bottom';
+            
+            const bpmText = state.bpm + ' BPM';
+            const bpmWidth = ctx.measureText(bpmText).width + 40;
+            
+            ctx.fillStyle = state.bpmBgColor || 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(1240 - bpmWidth, 640, bpmWidth, 50);
+            
+            ctx.shadowColor = state.bpmColor || state.color1;
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = state.bpmTextColor || '#ffffff';
+            ctx.fillText(bpmText, 1220, 675);
+            ctx.restore();
+            
+            // Producer Name (bottom center)
+            if (state.producerName && state.producerName.trim() !== '') {
+                ctx.save();
+                ctx.font = "700 32px 'Anton', sans-serif";
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                
+                const prodText = 'PROD BY ' + state.producerName.toUpperCase();
+                const prodWidth = ctx.measureText(prodText).width + 60;
+                
+                ctx.fillStyle = state.producerBgColor || 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect((canvas.width - prodWidth) / 2, 640, prodWidth, 50);
+                
+                ctx.shadowColor = state.producerColor || state.color2;
+                ctx.shadowBlur = 15;
+                ctx.fillStyle = state.producerTextColor || '#ffffff';
+                ctx.fillText(prodText, canvas.width / 2, 675);
+                ctx.restore();
+            }
+            
+            // Continue animation if audio is playing and reactive mode is on, OR if video background is playing, OR if visual effects are enabled
+            if ((state.enableReactive && isPlaying) || state.bgVideo || state.visualEffect !== 'none') {
                 animationId = requestAnimationFrame(render);
             }
         }
 
-        function drawText(text, font, size, color, posY, spacing, strokeWidth, strokeColor, opacity, rotation, bassLevel) {
-            if (!text) return;
-
-            ctx.save();
+        function drawVisualEffects(bassLevel, audioLevel) {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
             
-            // Apply reactive pulse
-            const pulseSize = state.enableReactive && bassLevel > 0 
-                ? size + (bassLevel * state.pulseStrength) 
-                : size;
-
-            ctx.font = `900 ${pulseSize}px "${font}"`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.globalAlpha = opacity / 100;
-
-            // Apply rotation
-            if (rotation !== 0) {
-                ctx.translate(canvas.width / 2, posY);
-                ctx.rotate(rotation * Math.PI / 180);
-                ctx.translate(-canvas.width / 2, -posY);
-            }
-
-            // Calculate total width with letter spacing
-            const metrics = ctx.measureText(text);
-            const totalSpacing = (text.length - 1) * spacing;
-            const totalWidth = metrics.width + totalSpacing;
-            let x = (canvas.width - totalWidth) / 2;
-
-            // Draw each character
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-                const charMetrics = ctx.measureText(char);
-
-                // Draw stroke (NO SHADOW!)
-                if (strokeWidth > 0) {
-                    ctx.strokeStyle = strokeColor;
-                    ctx.lineWidth = strokeWidth;
-                    ctx.lineJoin = 'round';
-                    ctx.strokeText(char, x + charMetrics.width / 2, posY);
+            // Waves effect (optimized - fewer waves)
+            if (state.visualEffect === 'waves' || state.visualEffect === 'all') {
+                ctx.save();
+                ctx.strokeStyle = state.color1;
+                ctx.lineWidth = 3;
+                ctx.globalAlpha = 0.3 + bassLevel * 0.5;
+                
+                for (let i = 0; i < 2; i++) { // Reduced from 3 to 2
+                    const radius = 200 + i * 150 + bassLevel * 150;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                    ctx.stroke();
                 }
-
-                // Draw fill
-                ctx.fillStyle = color;
-                ctx.fillText(char, x + charMetrics.width / 2, posY);
-
-                x += charMetrics.width + spacing;
+                ctx.restore();
             }
-
-            ctx.restore();
-        }
-
-        function drawBadge(bassLevel) {
-            ctx.save();
-
-            const scale = state.badgeSize * (state.enableReactive && bassLevel > 0 ? 1 + bassLevel * 0.1 : 1);
             
-            ctx.translate(state.badgePosX, state.badgePosY);
-            ctx.rotate(state.badgeRot * Math.PI / 180);
-            ctx.scale(scale, scale);
-
-            // Badge background
-            ctx.fillStyle = state.badgeColor;
-            ctx.beginPath();
-            ctx.roundRect(-60, -25, 120, 50, 8);
-            ctx.fill();
-
-            // Badge text
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 20px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(state.badge, 0, 0);
-
-            ctx.restore();
+            // Lightning effect (optimized - only on strong bass)
+            if ((state.visualEffect === 'lightning' || state.visualEffect === 'all') && bassLevel > 0.6) {
+                ctx.save();
+                ctx.strokeStyle = state.color2;
+                ctx.lineWidth = 4;
+                ctx.globalAlpha = bassLevel;
+                ctx.shadowColor = state.color2;
+                ctx.shadowBlur = 20;
+                
+                // Random lightning bolts (reduced from 3 to 2)
+                for (let i = 0; i < 2; i++) {
+                    ctx.beginPath();
+                    let x = centerX + (Math.random() - 0.5) * 600;
+                    let y = 0;
+                    ctx.moveTo(x, y);
+                    
+                    for (let j = 0; j < 6; j++) { // Reduced from 8 to 6
+                        x += (Math.random() - 0.5) * 100;
+                        y += canvas.height / 6;
+                        ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
         }
 
-        function drawLogo() {
-            if (!state.logoImage) return;
-
+        function drawOrb(x, y, size, color, opacity) {
             ctx.save();
-            ctx.globalAlpha = state.logoOpacity / 100;
-
-            ctx.translate(state.logoPosX, state.logoPosY);
-            ctx.rotate(state.logoRot * Math.PI / 180);
-
-            const logoW = state.logoSize;
-            const logoH = (state.logoImage.height / state.logoImage.width) * logoW;
-
-            ctx.drawImage(state.logoImage, -logoW / 2, -logoH / 2, logoW, logoH);
-
+            const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+            gradient.addColorStop(0, color + Math.floor(opacity * 255).toString(16).padStart(2, '0'));
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.filter = 'blur(60px)';
+            ctx.fillRect(x - size, y - size, size * 2, size * 2);
             ctx.restore();
-        }
-
-        function drawInfo() {
-            // BPM
-            ctx.fillStyle = state.infoColor;
-            ctx.font = `bold ${state.infoSize}px Arial`;
-            ctx.textAlign = 'left';
-            ctx.fillText(`${state.bpm} BPM`, 40, canvas.height - 40);
-
-            // Info text
-            ctx.textAlign = 'right';
-            ctx.fillText(state.infoText, canvas.width - 40, canvas.height - 40);
         }
 
         // Audio controls
@@ -1237,7 +1353,7 @@
                 showStatus('❌ Bitte zuerst Audio hochladen!');
                 return;
             }
-
+            
             if (isPlaying) {
                 audioElement.pause();
                 isPlaying = false;
@@ -1249,18 +1365,26 @@
                 render();
             } else {
                 try {
-                    if (audioContext.state === 'suspended') {
+                    // Resume audio context if suspended
+                    if (audioContext && audioContext.state === 'suspended') {
                         await audioContext.resume();
                     }
+                    
+                    // Play audio
                     await audioElement.play();
                     isPlaying = true;
                     document.getElementById('playBtn').textContent = '⏸';
+                    
+                    // Start animation if reactive mode is on
                     if (state.enableReactive) {
                         render();
                     }
+                    
+                    showStatus('▶ Audio läuft...');
+                    
                 } catch (error) {
                     console.error('Play error:', error);
-                    showStatus('❌ Fehler beim Abspielen');
+                    showStatus('❌ Fehler beim Abspielen: ' + error.message);
                     isPlaying = false;
                     document.getElementById('playBtn').textContent = '▶';
                 }
@@ -1275,128 +1399,134 @@
 
         // Export functions
         function downloadImage() {
+            // Stop animation temporarily if video is playing
+            const wasAnimating = animationId !== null;
             if (animationId) {
                 cancelAnimationFrame(animationId);
+                animationId = null;
             }
+            
+            // Render one final frame
             render();
-
+            
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `WIB_${state.text1}_${state.text2}_${Date.now()}.png`;
+                a.download = `WIHB_${state.text1}_${state.text2}_Thumbnail.png`;
                 a.click();
                 URL.revokeObjectURL(url);
-
+                
                 showStatus('✅ PNG gespeichert!');
-
-                if (state.enableReactive && isPlaying) {
+                
+                // Resume animation if it was running
+                if (wasAnimating) {
                     render();
                 }
             });
         }
-
-        let currentRecorder = null;
-        let recordChunks = [];
 
         async function recordVideo() {
             if (!audioElement.src) {
                 showStatus('❌ Bitte zuerst Audio hochladen!');
                 return;
             }
-
+            
+            if (!audioContext) {
+                showStatus('❌ Bitte Audio erst einmal abspielen bevor du aufnimmst!');
+                return;
+            }
+            
             const recordBtn = document.getElementById('recordBtn');
-
-            // If already recording, stop it
-            if (currentRecorder && currentRecorder.state === 'recording') {
-                currentRecorder.stop();
+            
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                // Stop recording
+                mediaRecorder.stop();
                 audioElement.pause();
                 isPlaying = false;
                 document.getElementById('playBtn').textContent = '▶';
-                recordBtn.textContent = '🎬 Als Video exportieren';
+                recordBtn.textContent = '🎬 Als MP4 aufnehmen (mit Audio)';
                 recordBtn.classList.remove('secondary');
-                showStatus('⏳ Video wird finalisiert...');
+                showStatus('⏳ Video wird verarbeitet...');
                 return;
             }
-
+            
+            // Start recording
+            recordedChunks = [];
+            
             try {
-                // Setup streams
-                const canvasStream = canvas.captureStream(60); // 60 FPS for smooth animation
+                // Create stream from canvas
+                const canvasStream = canvas.captureStream(30); // 30 FPS
+                
+                // Get audio stream
                 const audioDestination = audioContext.createMediaStreamDestination();
-                audioSource.connect(audioDestination);
-
+                if (audioSource) {
+                    audioSource.connect(audioDestination);
+                }
+                
+                // Combine streams
                 const combinedStream = new MediaStream([
                     ...canvasStream.getVideoTracks(),
                     ...audioDestination.stream.getAudioTracks()
                 ]);
-
-                // Setup recorder with high quality
-                recordChunks = [];
-                currentRecorder = new MediaRecorder(combinedStream, {
+                
+                mediaRecorder = new MediaRecorder(combinedStream, {
                     mimeType: 'video/webm;codecs=vp9,opus',
-                    videoBitsPerSecond: 10000000 // 10 Mbps for high quality
+                    videoBitsPerSecond: 8000000
                 });
-
-                currentRecorder.ondataavailable = (event) => {
+                
+                mediaRecorder.ondataavailable = (event) => {
                     if (event.data.size > 0) {
-                        recordChunks.push(event.data);
+                        recordedChunks.push(event.data);
                     }
                 };
-
-                currentRecorder.onstop = () => {
-                    const blob = new Blob(recordChunks, { type: 'video/webm' });
+                
+                mediaRecorder.onstop = () => {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `WIB_${state.text1}_${state.text2}_${Date.now()}.webm`;
+                    a.download = `WIB_${state.text1}_${state.text2}_Video.webm`;
                     a.click();
                     URL.revokeObjectURL(url);
-
-                    recordBtn.disabled = false;
-                    recordBtn.textContent = '🎬 Als Video exportieren';
-                    recordBtn.classList.remove('secondary');
-                    showStatus('✅ Video exportiert! (WebM - mit VLC als MP4 speichern)');
-                    currentRecorder = null;
+                    
+                    showStatus('✅ Video gespeichert! (WebM Format - kann in MP4 konvertiert werden)');
                 };
-
-                // Start recording
-                currentRecorder.start(100); // Capture in 100ms chunks
-
-                // Start audio playback
+                
+                mediaRecorder.start();
+                
+                // Start audio
                 audioElement.currentTime = 0;
                 if (audioContext.state === 'suspended') {
                     await audioContext.resume();
                 }
-                
                 await audioElement.play();
                 isPlaying = true;
                 document.getElementById('playBtn').textContent = '⏸';
-
-                // Enable animation
+                
+                // Start rendering
                 state.enableReactive = true;
                 document.getElementById('enableReactive').checked = true;
                 render();
-
-                // Update button
-                recordBtn.textContent = '⏹ Export stoppen';
+                
+                recordBtn.textContent = '⏹ Aufnahme stoppen';
                 recordBtn.classList.add('secondary');
-                showStatus('🔴 Video wird aufgenommen - läuft in Echtzeit!');
-
+                showStatus('🔴 Aufnahme läuft...');
+                
                 // Auto-stop when audio ends
                 audioElement.onended = () => {
-                    if (currentRecorder && currentRecorder.state === 'recording') {
-                        currentRecorder.stop();
+                    if (mediaRecorder && mediaRecorder.state === 'recording') {
+                        mediaRecorder.stop();
                         isPlaying = false;
                         document.getElementById('playBtn').textContent = '▶';
+                        recordBtn.textContent = '🎬 Als MP4 aufnehmen (mit Audio)';
+                        recordBtn.classList.remove('secondary');
                     }
                 };
-
+                
             } catch (error) {
-                console.error('Export error:', error);
-                showStatus('❌ Fehler: ' + error.message);
-                recordBtn.disabled = false;
-                recordBtn.textContent = '🎬 Als Video exportieren';
-                currentRecorder = null;
+                console.error('Recording error:', error);
+                showStatus('❌ Aufnahme-Fehler: ' + error.message);
             }
         }
 
@@ -1412,86 +1542,103 @@
         // Presets
         const presets = {
             drill: {
+                color1: '#ff0844',
+                color2: '#ff5e3a',
                 text1: 'DRILL',
                 text2: 'BALKAN',
                 textColor1: '#ffffff',
                 textColor2: '#ffffff',
                 badge: 'FREE',
-                badgeColor: '#ff0844',
-                bpm: 140
+                bpm: 140,
+                year: 2025
             },
             trap: {
+                color1: '#9d00ff',
+                color2: '#ff00ff',
                 text1: 'TRAP',
                 text2: 'BEAT',
                 textColor1: '#ffffff',
-                textColor2: '#9d00ff',
+                textColor2: '#ffffff',
                 badge: 'FREE',
-                badgeColor: '#9d00ff',
-                bpm: 145
+                bpm: 145,
+                year: 2025
             },
             melodic: {
+                color1: '#00d4ff',
+                color2: '#7b2cbf',
                 text1: 'MELODIC',
                 text2: 'VIBES',
-                textColor1: '#00d4ff',
-                textColor2: '#7b2cbf',
+                textColor1: '#ffffff',
+                textColor2: '#ffffff',
                 badge: 'FREE',
-                badgeColor: '#00d4ff',
-                bpm: 130
+                bpm: 130,
+                year: 2025
             },
             aggressive: {
+                color1: '#ff0000',
+                color2: '#000000',
                 text1: 'HARD',
                 text2: 'BEAT',
                 textColor1: '#ffffff',
                 textColor2: '#ff0000',
                 badge: 'NEW',
-                badgeColor: '#ff0000',
-                bpm: 150
+                bpm: 150,
+                year: 2025
             },
             balkan: {
+                color1: '#ff0000',
+                color2: '#0066ff',
                 text1: 'DRILL',
                 text2: 'BALKAN',
                 textColor1: '#ffffff',
-                textColor2: '#0066ff',
+                textColor2: '#ffffff',
                 badge: 'FREE',
-                badgeColor: '#ff0000',
-                bpm: 140
+                bpm: 140,
+                year: 2025
             },
             dark: {
+                color1: '#1a1a1a',
+                color2: '#4a4a4a',
                 text1: 'DARK',
                 text2: 'BEAT',
                 textColor1: '#ffffff',
                 textColor2: '#999999',
                 badge: 'NEW',
-                badgeColor: '#4a4a4a',
-                bpm: 135
+                bpm: 135,
+                year: 2025
             }
         };
 
         function applyPreset(name) {
             const preset = presets[name];
-
+            
+            document.getElementById('color1').value = preset.color1;
+            document.getElementById('color2').value = preset.color2;
             document.getElementById('text1').value = preset.text1;
             document.getElementById('text2').value = preset.text2;
             document.getElementById('textColor1').value = preset.textColor1;
             document.getElementById('textColor2').value = preset.textColor2;
             document.getElementById('badge').value = preset.badge;
-            document.getElementById('badgeColor').value = preset.badgeColor;
             document.getElementById('bpm').value = preset.bpm;
-
+            document.getElementById('year').value = preset.year;
+            
+            state.color1 = preset.color1;
+            state.color2 = preset.color2;
             state.text1 = preset.text1;
             state.text2 = preset.text2;
             state.textColor1 = preset.textColor1;
             state.textColor2 = preset.textColor2;
             state.badge = preset.badge;
-            state.badgeColor = preset.badgeColor;
             state.bpm = preset.bpm;
-
+            state.year = preset.year;
+            
             render();
-            showStatus(`✅ Vorlage "${name}" angewendet!`);
         }
 
-        // Initial render
-        render();
+        // Initial render - call after DOM is ready
+        window.addEventListener('load', () => {
+            render(performance.now());
+        });
     </script>
 </body>
 </html>
