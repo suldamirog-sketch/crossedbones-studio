@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CALI - Studio Sessions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #FFFFFF;
+            --accent: #1a1a1a;
+            --dark: #000000;
+            --light: #FFFFFF;
+            --gray: #808080;
+            --gradient-1: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            --gradient-2: linear-gradient(135deg, #FFFFFF 0%, #f0f0f0 100%);
+            --gradient-3: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            background-image: url('RENDER_3.gif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: contrast(1.2) brightness(1.1);
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 0%, 
+                transparent 20%,
+                rgba(0, 0, 0, 0.2) 35%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.8) 65%,
+                rgba(0, 0, 0, 0.95) 80%,
+                #000000 100%);
+            z-index: 1;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70vh;
+            background: linear-gradient(to top, 
+                #000000 0%, 
+                #000000 20%,
+                rgba(0, 0, 0, 0.9) 40%,
+                rgba(0, 0, 0, 0.6) 60%,
+                transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+            object-fit: contain;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #FFFFFF;
+            line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .bio {
+            font-size: 1.1rem;
+            color: rgba(248, 249, 250, 0.7);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Links Section */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-item {
+            position: relative;
+            text-decoration: none;
+            color: var(--light);
+            padding: 22px 30px;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out backwards;
+            letter-spacing: -0.01em;
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(255, 255, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .link-item:hover::before {
+            opacity: 1;
+        }
+
+        .link-item:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: rgba(255, 0, 0, 0.8);
+            background: rgba(255, 0, 0, 0.2);
+            box-shadow: 
+                0 10px 40px rgba(255, 0, 0, 0.3),
+                inset 0 0 50px rgba(255, 255, 255, 0.05);
+        }
+
+        .link-item:nth-child(1) { animation-delay: 0.1s; }
+        .link-item:nth-child(2) { animation-delay: 0.2s; }
+        .link-item:nth-child(3) { animation-delay: 0.3s; }
+        .link-item:nth-child(4) { animation-delay: 0.4s; }
+        .link-item:nth-child(5) { animation-delay: 0.5s; }
+        .link-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .link-item:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .link-item:hover::before {
+            width: 100%;
+        }
+
+        .link-icon {
+            font-size: 1.8rem;
+            min-width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .link-text {
+            flex: 1;
+        }
+
+        .link-arrow {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .link-item:hover .link-arrow {
+            transform: translateX(8px);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out 0.5s backwards;
+        }
+
+        .gallery-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 15px;
+            position: relative;
+        }
+
+        .gallery-grid::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.7;
+            animation: pulseGlow 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 0.9;
+                transform: scale(1.05);
+            }
+        }
+
+        .gallery-large {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            text-decoration: none;
+            display: block;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 0, 0, 0.3) 0%, 
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            z-index: 2;
+            mix-blend-mode: overlay;
+        }
+
+        .gallery-item::after {
+            content: '🔗';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 10px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 4;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: -100%;
+            background: conic-gradient(from 0deg, 
+                transparent 0deg, 
+                rgba(255, 255, 255, 0.4) 90deg, 
+                transparent 180deg,
+                rgba(255, 255, 255, 0.4) 270deg,
+                transparent 360deg);
+            opacity: 0;
+            transition: all 0.6s ease;
+            z-index: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            mix-blend-mode: luminosity;
+            opacity: 0.75;
+            filter: contrast(1.15) brightness(1.05) grayscale(30%);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .gallery-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #FF0000, #FFFFFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transform: translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .gallery-item:hover,
+        .gallery-item:active,
+        .gallery-item.touched {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 0, 0, 0.8);
+            box-shadow: 
+                0 25px 70px rgba(255, 0, 0, 0.4),
+                0 0 100px rgba(255, 0, 0, 0.3),
+                inset 0 0 80px rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        .gallery-item:hover::before,
+        .gallery-item:active::before,
+        .gallery-item.touched::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover::after,
+        .gallery-item:active::after,
+        .gallery-item.touched::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item:hover::after,
+        .gallery-item:active::after,
+        .gallery-item.touched::after {
+            opacity: 1;
+            animation: rotateGradient 3s linear infinite;
+        }
+
+        @keyframes rotateGradient {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:active img,
+        .gallery-item.touched img {
+            transform: scale(1.15) rotate(2deg);
+            opacity: 1;
+            mix-blend-mode: normal;
+            filter: contrast(1.25) brightness(1.15) saturate(1.4) grayscale(0%);
+        }
+
+        .gallery-item:hover .gallery-overlay,
+        .gallery-item:active .gallery-overlay,
+        .gallery-item.touched .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-label,
+        .gallery-item:active .gallery-label,
+        .gallery-item.touched .gallery-label {
+            transform: translateY(0);
+        }
+
+        /* Staggered Animations */
+        .gallery-item:nth-child(1) {
+            animation: scaleIn 0.8s ease-out 0.6s backwards;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation: slideInRight 0.8s ease-out 0.8s backwards;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation: slideInRight 0.8s ease-out 1s backwards;
+        }
+
+        .gallery-item:nth-child(4) {
+            animation: slideInLeft 0.8s ease-out 1.2s backwards;
+        }
+
+        .gallery-item:nth-child(5) {
+            animation: slideInLeft 0.8s ease-out 1.4s backwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .gallery-item-wide {
+            grid-column: 1 / -1;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px) rotate(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Lightbox for Images */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 80px rgba(255, 0, 0, 0.3);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 40px;
+            color: white;
+            background: rgba(255, 0, 0, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 20px;
+                right: 20px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Music Player Section */
+        .music-section {
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-out 1.6s backwards;
+        }
+
+        .music-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #FF0000, #FFFFFF, #FF0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .track-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .track-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .track-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 163, 0.5);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+        }
+
+        .track-item:hover::before {
+            opacity: 1;
+        }
+
+        .track-item.playing {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .track-cover {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        .track-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+            opacity: 0.8;
+            transition: all 0.4s ease;
+        }
+
+        .track-item:hover .track-cover img {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--dark);
+            z-index: 2;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .track-item:hover .play-button {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .track-item.playing .play-button {
+            opacity: 1;
+            background: var(--primary);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .track-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .track-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .track-artist {
+            font-size: 0.9rem;
+            color: rgba(255, 0, 0, 0.6);
+        }
+
+        /* Spotify Section */
+        .spotify-section {
+            margin-top: 40px;
+        }
+
+        .spotify-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--light);
+        }
+
+        .spotify-embeds {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .spotify-embeds iframe {
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .spotify-embeds iframe:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Muso.ai Section - Screenshot Design */
+        .muso-section {
+            margin-top: 40px;
+            padding: 35px;
+            background: linear-gradient(135deg, rgba(20, 0, 0, 0.9), rgba(10, 0, 0, 0.95));
+            border-radius: 25px;
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.2);
+        }
+
+        .muso-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .muso-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 0, 0, 0.2);
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 0, 0, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .muso-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .muso-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+
+        .muso-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .muso-info {
+            flex: 1;
+        }
+
+        .muso-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 5px 0;
+            letter-spacing: -0.02em;
+        }
+
+        .muso-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+
+        .muso-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .muso-card {
+            background: rgba(255, 0, 0, 0.08);
+            border: 2px solid rgba(255, 0, 0, 0.2);
+            border-radius: 18px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .muso-card:hover {
+            background: rgba(255, 0, 0, 0.15);
+            border-color: rgba(255, 0, 0, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .muso-card-streams {
+            grid-column: 1 / -1;
+        }
+
+        .muso-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .muso-card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+
+        .muso-card-icons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .platform-icon {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .muso-card-icon {
+            font-size: 1.2rem;
+        }
+
+        .muso-card-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .muso-card-streams .muso-card-value {
+            font-size: 4rem;
+            font-weight: 900;
+        }
+
+        .muso-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        .muso-branding {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: rgba(255, 0, 0, 0.6);
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .muso-branding:hover {
+            color: var(--accent);
+        }
+
+        .muso-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .muso-section {
+                padding: 25px 20px;
+            }
+
+            .muso-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .muso-avatar {
+                width: 70px;
+                height: 70px;
+            }
+
+            .muso-name {
+                font-size: 1.5rem;
+            }
+
+            .muso-card-value {
+                font-size: 2.5rem;
+            }
+
+            .muso-card-streams .muso-card-value {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Responsive Music */
+        @media (max-width: 768px) {
+            .music-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+
+            .bio {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile {
+                margin-bottom: 35px;
+            }
+
+            /* Gallery Mobile */
+            .gallery-section {
+                margin-bottom: 35px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                gap: 10px;
+            }
+
+            .gallery-large {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                aspect-ratio: 16/9;
+            }
+
+            .gallery-item {
+                aspect-ratio: 1;
+                border-radius: 12px;
+            }
+
+            .gallery-label {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            .gallery-overlay {
+                padding: 12px;
+            }
+
+            .gallery-item:hover {
+                transform: scale(1.02);
+            }
+
+            /* Music Mobile */
+            .music-section {
+                margin-bottom: 35px;
+            }
+
+            .music-title {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .spotify-embeds {
+                gap: 12px;
+            }
+
+            .spotify-embeds iframe {
+                height: 152px;
+            }
+
+            /* Links Mobile */
+            .links {
+                gap: 12px;
+            }
+
+            .link-item {
+                padding: 16px 20px;
+                font-size: 1rem;
+                border-radius: 16px;
+            }
+
+            .link-icon {
+                font-size: 1.5rem;
+                min-width: 30px;
+            }
+
+            .link-arrow {
+                font-size: 1.1rem;
+            }
+
+            /* Disable cursor glow on mobile */
+            .cursor-glow {
+                display: none;
+            }
+
+            /* Footer Mobile */
+            footer {
+                margin-top: 40px;
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .gallery-grid {
+                gap: 8px;
+            }
+
+            .link-item {
+                padding: 14px 18px;
+                font-size: 0.95rem;
+            }
+
+            .spotify-embeds {
+                gap: 10px;
+            }
+        }
+
+        /* Custom Cursor Effect */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Welcome Overlay */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .welcome-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .welcome-content {
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .welcome-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.5));
+        }
+
+        .welcome-text {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: lowercase;
+        }
+
+        .enter-btn {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 50px;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .enter-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 60px rgba(255, 0, 0, 0.5);
+        }
+
+        .enter-btn:active {
+            transform: scale(0.95);
+        }
+
+        .enter-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-hint {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 0, 0, 0.5);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-logo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+            }
+
+            .enter-btn {
+                font-size: 1.2rem;
+                padding: 16px 40px;
+            }
+        }
+
+        /* Background Music Control */
+        .bg-music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .music-toggle-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 24px;
+        }
+
+        .music-toggle-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .music-toggle-btn.muted {
+            opacity: 0.5;
+        }
+
+        .music-toggle-btn.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+            }
+        }
+
+        /* Mobile Gallery Improvements */
+        @media (max-width: 768px) {
+            /* Make labels always visible on mobile */
+            .gallery-overlay {
+                opacity: 0.7;
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, transparent 65%);
+            }
+
+            .gallery-label {
+                transform: translateY(0);
+                font-size: 0.95rem;
+                letter-spacing: 2px;
+            }
+
+            /* Enhanced effect on touch */
+            .gallery-item.touched .gallery-overlay {
+                opacity: 1;
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 70%);
+            }
+
+            .gallery-item.touched .gallery-label {
+                transform: scale(1.15);
+                letter-spacing: 3px;
+            }
+
+            .gallery-item.touched img {
+                transform: scale(1.1);
+            }
+
+            /* Disable cursor glow on mobile */
+            .cursor-glow {
+                display: none;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .gallery-label {
+                font-size: 0.85rem;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        /* Studio Booking Section */
+        .booking-section {
+            margin-bottom: 60px;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+        }
+
+        .booking-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        .booking-description {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .booking-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Custom select arrow */
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        /* Option styling */
+        .form-group select option {
+            background: #1a1a1a;
+            color: white;
+            padding: 10px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .booking-submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            color: #000000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .booking-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            background: #f0f0f0;
+        }
+
+        .booking-submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .booking-success {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        .booking-success h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: #FFFFFF;
+            margin-bottom: 10px;
+        }
+
+        .booking-success p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        /* Payment Info Section */
+        .payment-info {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .payment-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .payment-amount {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .payment-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .payment-note {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .payment-test-badge {
+            display: inline-block;
+            background: rgba(255, 165, 0, 0.2);
+            border: 2px solid rgba(255, 165, 0, 0.5);
+            color: orange;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .pay-method {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+
+            .bio {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile {
+                margin-bottom: 40px;
+            }
+
+            /* Booking Section Mobile */
+            .booking-section {
+                padding: 30px 20px;
+                margin-bottom: 40px;
+            }
+
+            .booking-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .booking-description {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-bottom: 0;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-group label {
+                font-size: 0.85rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .form-group select {
+                background-position: right 12px center;
+                padding-right: 35px;
+            }
+
+            .booking-submit-btn {
+                padding: 18px;
+                font-size: 1.1rem;
+            }
+
+            /* Gallery Mobile */
+            .gallery-section {
+                margin-bottom: 35px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                gap: 10px;
+            }
+
+            .gallery-large {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                aspect-ratio: 16/9;
+            }
+
+            .gallery-item {
+                aspect-ratio: 1;
+                border-radius: 12px;
+            }
+
+            .gallery-label {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+
+            .gallery-overlay {
+                padding: 12px;
+            }
+
+            /* Music Mobile */
+            .music-section {
+                margin-bottom: 35px;
+            }
+
+            .music-title {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .spotify-embeds {
+                gap: 12px;
+            }
+
+            .spotify-embeds iframe {
+                height: 152px;
+            }
+
+            /* Muso Section Mobile */
+            .muso-section {
+                padding: 25px 20px;
+            }
+
+            .muso-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .muso-avatar {
+                width: 70px;
+                height: 70px;
+            }
+
+            .muso-name {
+                font-size: 1.5rem;
+            }
+
+            .muso-card-value {
+                font-size: 2.5rem;
+            }
+
+            .muso-card-streams .muso-card-value {
+                font-size: 3.5rem;
+            }
+
+            /* Links Mobile */
+            .links {
+                gap: 12px;
+            }
+
+            .link-item {
+                padding: 16px 20px;
+                font-size: 1rem;
+                border-radius: 16px;
+            }
+
+            .link-icon {
+                font-size: 1.5rem;
+                min-width: 30px;
+            }
+
+            .link-arrow {
+                font-size: 1.1rem;
+            }
+
+            /* Disable cursor glow on mobile */
+            .cursor-glow {
+                display: none;
+            }
+
+            /* Footer Mobile */
+            footer {
+                margin-top: 40px;
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+
+            /* Gallery labels always visible on mobile */
+            .gallery-overlay {
+                opacity: 0.7;
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, transparent 65%);
+            }
+
+            .gallery-label {
+                transform: translateY(0);
+            }
+
+            /* Enhanced effect on touch */
+            .gallery-item.touched .gallery-overlay {
+                opacity: 1;
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 70%);
+            }
+
+            .gallery-item.touched .gallery-label {
+                transform: scale(1.15);
+                letter-spacing: 2px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .booking-title {
+                font-size: 1.6rem;
+            }
+
+            .booking-section {
+                padding: 25px 15px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 12px 14px;
+            }
+
+            .gallery-grid {
+                gap: 8px;
+            }
+
+            .link-item {
+                padding: 14px 18px;
+                font-size: 0.95rem;
+            }
+
+            .spotify-embeds {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="container">
+        <!-- Studio Booking Section - GANZ OBEN -->
+        <div class="booking-section">
+            <h2 class="booking-title">🎙️ Studio Session buchen</h2>
+            <p class="booking-description">Buche jetzt deine Studio Session mit CALI</p>
+            
+            <form class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientName">Name *</label>
+                        <input type="text" id="clientName" required placeholder="Dein Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientEmail">Email *</label>
+                        <input type="email" id="clientEmail" required placeholder="deine@email.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="clientPhone">Telefon</label>
+                        <input type="tel" id="clientPhone" placeholder="+49 123 456789">
+                    </div>
+                    <div class="form-group">
+                        <label for="sessionDate">Datum *</label>
+                        <input type="date" id="sessionDate" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sessionTime">Uhrzeit *</label>
+                        <select id="sessionTime" required>
+                            <option value="">Wähle Uhrzeit</option>
+                            <option value="10:00">10:00 Uhr</option>
+                            <option value="12:00">12:00 Uhr</option>
+                            <option value="14:00">14:00 Uhr</option>
+                            <option value="16:00">16:00 Uhr</option>
+                            <option value="18:00">18:00 Uhr</option>
+                            <option value="20:00">20:00 Uhr</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sessionType">Session Typ *</label>
+                        <select id="sessionType" required>
+                            <option value="">Wähle Session Typ</option>
+                            <option value="Recording Session">Recording Session</option>
+                            <option value="Mixing Session">Mixing Session</option>
+                            <option value="Mastering Session">Mastering Session</option>
+                            <option value="Beat Production">Beat Production</option>
+                            <option value="Beratung">Beratung</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Nachricht</label>
+                    <textarea id="message" rows="3" placeholder="Was möchtest du aufnehmen?"></textarea>
+                </div>
+
+                <div class="payment-info">
+                    <div class="payment-icon">💳</div>
+                    <h3 class="payment-title">Anzahlung erforderlich</h3>
+                    <div class="payment-amount">50€</div>
+                    <div class="payment-test-badge">🧪 TEST: 0,01€</div>
+                    <div class="payment-methods">
+                        <span class="pay-method">💳 Kreditkarte</span>
+                        <span class="pay-method">🅿️ PayPal</span>
+                        <span class="pay-method">🍎 Apple Pay</span>
+                    </div>
+                    <div class="payment-note">
+                        ✓ Sichere Zahlung via PayPal<br>
+                        ✓ Wird auf den Gesamtpreis angerechnet<br>
+                        ✓ Du bekommst WhatsApp Benachrichtigung
+                    </div>
+                </div>
+
+                <button type="button" class="booking-submit-btn" onclick="submitBooking()">
+                    <span class="btn-text">Jetzt buchen & bezahlen</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </form>
+
+            <!-- Schritt 2: Nach Buchung -->
+            <div id="bookingSuccess" style="display:none; text-align:center; padding:20px;">
+                <div style="font-size:3rem; margin-bottom:15px;">✅</div>
+                <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.8rem; color:white; margin-bottom:10px;">Buchung erfolgreich!</h3>
+                <p style="color:rgba(255,255,255,0.7); margin-bottom:30px;">Klicke jetzt auf die Buttons unten:</p>
+                
+                <div style="display:flex; flex-direction:column; gap:15px; max-width:400px; margin:0 auto;">
+                    <a id="whatsappBtn" href="#" target="_blank"
+                       style="display:flex; align-items:center; justify-content:center; gap:10px; padding:18px; background:#25D366; color:white; border-radius:14px; text-decoration:none; font-family:'Outfit',sans-serif; font-weight:700; font-size:1.1rem;">
+                        📱 WhatsApp Nachricht senden
+                    </a>
+                    <a id="paypalBtn" href="#" target="_blank"
+                       style="display:flex; align-items:center; justify-content:center; gap:10px; padding:18px; background:#0070ba; color:white; border-radius:14px; text-decoration:none; font-family:'Outfit',sans-serif; font-weight:700; font-size:1.1rem;">
+                        💳 0,01€ Anzahlung bezahlen
+                    </a>
+                    <button onclick="resetBooking()"
+                       style="padding:14px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:14px; cursor:pointer; font-family:'Outfit',sans-serif; font-size:1rem;">
+                        ← Neue Buchung
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile">
+            <div class="profile-img">
+                <img src="logo_wei.png" alt="WIH Logo">
+            </div>
+            <h1>CALI</h1>
+            <p class="bio">Engineer, Artist, Songwriter 🚀</p>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+            <div class="gallery-grid">
+                <a href="https://nextuplive.app/de/c4tb" target="_blank" class="gallery-item gallery-large">
+                    <img src="img5.jpg" alt="Crew Love">
+                    <div class="gallery-overlay">
+                        <span class="gallery-label">SONG EINREICHEN
+                    </div>
+                </a>
+                <a href="https://recmixmas.de/" target="_blank" class="gallery-item">
+                    <img src="img1.jpg" alt="Studio Session">
+                    <div class="gallery-overlay">
+                        <span class="gallery-label">MASTER
+                        CLASS
+                    </div>
+                </a>
+                <a href="https://open.spotify.com/playlist/459WpCrMYdVzKQhm5hajFO?si=8ca7bb0081234d75&nd=1&dlsi=adece55569384cc6" target="_blank" class="gallery-item">
+                    <img src="img3.png" alt="In the Zone">
+                    <div class="gallery-overlay">
+                        <span class="gallery-label">NEWCOMER
+                        REACTION </span>
+                    </div>
+                </a>
+                <a href="https://open.spotify.com/playlist/6smr01mdEZDh3vqGT3b01A?si=cbe9a5f04e0c4a57&nd=1&dlsi=6c1ef1d08d504995" target="_blank" class="gallery-item">
+                    <img src="img2.jpg" alt="Crew">
+                    <div class="gallery-overlay">
+                        <span class="gallery-label">PRODUCRD 
+                        BY CALI 💯</span>
+                    </div>
+                </a>
+                <a href="https://open.spotify.com/intl-de/track/0fbN71M0JHY7WNi6vF7DUG?si=0800c21471c34f10" target="_blank" class="gallery-item">
+                    <img src="img4.jpg" alt="Studio Vibes">
+                    <div class="gallery-overlay">
+                        <span class="gallery-label">NEUSTE 
+                        SINGEL ⚡</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Music Player Section -->
+        <div class="music-section">
+            <h2 class="music-title">🎧 My Tracks</h3>
+            
+            <!-- Spotify Embed Section -->
+            <div class="spotify-embeds">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4FJCPBEg5CFbIBzBXe6At8?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/0rzvYLtzWru0Spniplg2Su?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4KGiofOgBiP6rxV6OsI7pI?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Muso.ai Stats - Screenshot Design -->
+            <div class="muso-section">
+                <div class="muso-header">
+                    <div class="muso-badge">2025 Summary</div>
+                </div>
+                
+                <div class="muso-profile">
+                    <div class="muso-avatar">
+                        <img src="logo_wei.png" alt="wahllaichhabbock">
+                    </div>
+                    <div class="muso-info">
+                        <h2 class="muso-name">CALI</h2>
+                        <p class="muso-role">Engineer, Artist, Songwriter</p>
+                    </div>
+                </div>
+
+                <div class="muso-grid">
+                    <div class="muso-card muso-card-streams">
+                        <div class="muso-card-header">
+                            <span class="muso-card-title">Streams</span>
+                            <div class="muso-card-icons">
+                                <span class="platform-icon">🎵</span>
+                                <span class="platform-icon">🎧</span>
+                                <span class="platform-icon">▶️</span>
+                            </div>
+                        </div>
+                        <div class="muso-card-value">4.5M</div>
+                    </div>
+
+                    <div class="muso-card">
+                        <div class="muso-card-header">
+                            <span class="muso-card-title">Credits</span>
+                            <span class="muso-card-icon">💎</span>
+                        </div>
+                        <div class="muso-card-value">96</div>
+                    </div>
+
+                    <div class="muso-card">
+                        <div class="muso-card-header">
+                            <span class="muso-card-title">Videos</span>
+                            <div class="muso-card-icons">
+                                <span class="platform-icon">📹</span>
+                                <span class="platform-icon">🎬</span>
+                            </div>
+                        </div>
+                        <div class="muso-card-value">26</div>
+                    </div>
+
+                    <div class="muso-card">
+                        <div class="muso-card-header">
+                            <span class="muso-card-title">Views</span>
+                            <div class="muso-card-icons">
+                                <span class="platform-icon">👁️</span>
+                                <span class="platform-icon">📺</span>
+                            </div>
+                        </div>
+                        <div class="muso-card-value">9.7K</div>
+                    </div>
+                </div>
+
+                <div class="muso-footer">
+                    <a href="https://credits.muso.ai/profile/b689e998-f1fc-4cc8-9a61-640363a70fba" target="_blank" class="muso-branding">
+                        <span class="muso-logo">MUSO.AI</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="https://tr.ee/XeLtDZ0Pnw/" class="link-item" target="_blank">
+                <span class="link-icon">📸</span>
+                <span class="link-text">Instagram</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://tr.ee/66Akywkn-3" class="link-item" target="_blank">
+                <span class="link-icon">🎵</span>
+                <span class="link-text">TikTok</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+            <a href="https://tr.ee/VdVjU-4sn3" class="link-item" target="_blank">
+                <span class="link-icon">📺</span>
+                <span class="link-text">YouTube</span>
+                <span class="link-arrow">→</span>
+            </a>
+
+       
+
+        <footer>
+            Made WIHB 💖 | <a href="#" id="editLinks">Links anpassen</a>
+        </footer>
+    </div>
+
+    <!-- Lightbox for Gallery Images -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <div class="lightbox-close" id="lightbox-close">×</div>
+            <img id="lightbox-img" src="" alt="Full Image">
+        </div>
+    </div>
+
+    <script>
+        function submitBooking() {
+            const name = document.getElementById('clientName').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const date = document.getElementById('sessionDate').value;
+            const time = document.getElementById('sessionTime').value;
+            const sessionType = document.getElementById('sessionType').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !date || !time || !sessionType) {
+                alert('⚠️ Bitte fülle alle Pflichtfelder aus (*)');
+                return;
+            }
+
+            const waText = `🎙️ *NEUE STUDIO BUCHUNG!*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Telefon:* ${phone || 'Keine'}\n📅 *Datum:* ${date}\n🕐 *Uhrzeit:* ${time} Uhr\n🎵 *Session:* ${sessionType}\n💬 *Nachricht:* ${message || 'Keine'}\n\n💳 Anzahlung 0,01€ TEST wird bezahlt!`;
+            const waUrl = `https://wa.me/4917622552318?text=${encodeURIComponent(waText)}`;
+            const ppUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=suldamirog%40gmail.com&item_name=${encodeURIComponent('Studio Session - ' + name + ' - ' + date)}&amount=0.01&currency_code=EUR&no_note=0`;
+
+            document.getElementById('whatsappBtn').href = waUrl;
+            document.getElementById('paypalBtn').href = ppUrl;
+            document.getElementById('bookingForm').style.display = 'none';
+            document.getElementById('bookingSuccess').style.display = 'block';
+        }
+
+        function resetBooking() {
+            document.getElementById('bookingForm').reset();
+            document.getElementById('bookingForm').style.display = 'block';
+            document.getElementById('bookingSuccess').style.display = 'none';
+        }
+    </script>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Cursor Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animate() {
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+            cursorGlow.style.left = currentX + 'px';
+            cursorGlow.style.top = currentY + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Link clicks with animation
+        document.querySelectorAll('.link-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Mobile touch support for gallery - IMPROVED
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            let touchTimer;
+            let isPressed = false;
+            
+            // Touch/Click start
+            item.addEventListener('touchstart', function(e) {
+                // Don't prevent default - allow link to work
+                isPressed = true;
+                this.classList.add('touched');
+                
+                // Keep the effect visible longer
+                clearTimeout(touchTimer);
+                touchTimer = setTimeout(() => {
+                    if (!isPressed) {
+                        this.classList.remove('touched');
+                    }
+                }, 3500);
+            }, { passive: true });
+            
+            // Touch end
+            item.addEventListener('touchend', function(e) {
+                isPressed = false;
+                // Keep effect for 2 more seconds after touch
+                setTimeout(() => {
+                    this.classList.remove('touched');
+                }, 2000);
+            }, { passive: true });
+
+            // Touch cancel (if user drags away)
+            item.addEventListener('touchcancel', function(e) {
+                isPressed = false;
+                this.classList.remove('touched');
+            }, { passive: true });
+
+            // Also add click support for desktop
+            item.addEventListener('mouseenter', function() {
+                this.classList.add('touched');
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.classList.remove('touched');
+            });
+        });
+
+        // Cursor Glow Effect
+        const cursorGlow = document.getElementById('cursorGlow');
+        let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animate() {
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+            cursorGlow.style.left = currentX + 'px';
+            cursorGlow.style.top = currentY + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Link clicks with animation
+        document.querySelectorAll('.link-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Edit links info
+        document.getElementById('editLinks').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Um die Links anzupassen, öffne die HTML-Datei in einem Texteditor und ändere die href-Attribute der Links sowie die Icons und Texte nach deinen Wünschen!');
+        });
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('sessionDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
