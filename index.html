@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WIB Pro Generator - Verbesserte Version</title>
+    <title>WIHB Pro Generator v1 </title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&family=Russo+One&family=Teko:wght@700&family=Anton&family=Black+Ops+One&family=Permanent+Marker&family=Righteous&family=Staatliches&family=Passion+One:wght@700&family=Montserrat:wght@900&family=Impact&display=swap');
         
@@ -300,41 +300,34 @@
             cursor: pointer;
         }
 
-        .two-col-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .color-row {
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
-        }
-
-        .color-row input[type="color"] {
-            flex: 1;
-            height: 50px;
-        }
-
-        .remove-btn {
-            padding: 12px;
-            background: #ff0844;
-            border: none;
+        .text-section-collapsed {
+            background: #2a2a2a;
+            padding: 15px;
             border-radius: 8px;
-            color: white;
+            margin-bottom: 15px;
             cursor: pointer;
-            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .remove-btn:hover {
-            background: #cc0035;
+        .text-section-collapsed:hover {
+            background: #333;
+        }
+
+        .text-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .text-section-toggle {
+            color: #ff0844;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎵 WIB PRO GENERATOR - VERBESSERT</h1>
+        <h1>🎵 WIB PRO - 5 TEXT-EBENEN</h1>
         
         <div class="main-grid">
             <!-- Controls Panel -->
@@ -368,130 +361,50 @@
                         <input type="range" id="bgPosY" min="0" max="100" value="50">
                     </div>
                     <div class="control-group">
-                        <label>Abdunklung (Overlay) <span class="range-value" id="bgOverlayValue">30%</span></label>
+                        <label>Abdunklung <span class="range-value" id="bgOverlayValue">30%</span></label>
                         <input type="range" id="bgOverlay" min="0" max="100" value="30">
                     </div>
                 </div>
 
-                <!-- Text 1 Section -->
-                <div class="section">
-                    <div class="section-title">✏️ Text 1 (Oben)</div>
-                    <div class="control-group">
-                        <label>Text</label>
-                        <input type="text" id="text1" value="DRILL" maxlength="50">
-                    </div>
-                    <div class="control-group">
-                        <label>Schriftart</label>
-                        <select id="font1">
-                            <option value="Bebas Neue">Bebas Neue</option>
-                            <option value="Anton">Anton</option>
-                            <option value="Oswald">Oswald</option>
-                            <option value="Russo One">Russo One</option>
-                            <option value="Black Ops One">Black Ops One</option>
-                            <option value="Permanent Marker">Permanent Marker</option>
-                            <option value="Righteous">Righteous</option>
-                            <option value="Staatliches">Staatliches</option>
-                            <option value="Passion One">Passion One</option>
-                            <option value="Teko">Teko</option>
-                            <option value="Montserrat">Montserrat Black</option>
-                            <option value="Impact">Impact</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label>Textfarbe</label>
-                        <input type="color" id="textColor1" value="#ffffff">
-                    </div>
-                    <div class="control-group">
-                        <label>Textgröße <span class="range-value" id="fontSize1Value">120px</span></label>
-                        <input type="range" id="fontSize1" min="50" max="300" value="120">
-                    </div>
-                    <div class="control-group">
-                        <label>Position Y <span class="range-value" id="textPosY1Value">200</span></label>
-                        <input type="range" id="textPosY1" min="50" max="500" value="200">
-                    </div>
-                    <div class="control-group">
-                        <label>Buchstabenabstand <span class="range-value" id="letterSpacing1Value">20px</span></label>
-                        <input type="range" id="letterSpacing1" min="0" max="50" value="20">
-                    </div>
-                    <div class="control-group">
-                        <label>Kontur Dicke <span class="range-value" id="stroke1Value">6px</span></label>
-                        <input type="range" id="stroke1" min="0" max="20" value="6">
-                    </div>
-                    <div class="control-group">
-                        <label>Konturfarbe</label>
-                        <input type="color" id="strokeColor1" value="#000000">
-                    </div>
-                    <div class="control-group">
-                        <label>Transparenz <span class="range-value" id="opacity1Value">100%</span></label>
-                        <input type="range" id="opacity1" min="0" max="100" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Rotation <span class="range-value" id="rotation1Value">0°</span></label>
-                        <input type="range" id="rotation1" min="-45" max="45" value="0">
-                    </div>
-                </div>
+                <!-- Text Controls - will be generated dynamically -->
+                <div id="textControls"></div>
 
-                <!-- Text 2 Section -->
+                <!-- Logo Section -->
                 <div class="section">
-                    <div class="section-title">✏️ Text 2 (Unten)</div>
-                    <div class="control-group">
-                        <label>Text</label>
-                        <input type="text" id="text2" value="BALKAN" maxlength="50">
+                    <div class="section-title">🎨 Logo (Transparent)</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showLogo">
+                        <label for="showLogo">Logo anzeigen</label>
                     </div>
                     <div class="control-group">
-                        <label>Schriftart</label>
-                        <select id="font2">
-                            <option value="Bebas Neue">Bebas Neue</option>
-                            <option value="Anton">Anton</option>
-                            <option value="Oswald">Oswald</option>
-                            <option value="Russo One">Russo One</option>
-                            <option value="Black Ops One">Black Ops One</option>
-                            <option value="Permanent Marker">Permanent Marker</option>
-                            <option value="Righteous">Righteous</option>
-                            <option value="Staatliches">Staatliches</option>
-                            <option value="Passion One">Passion One</option>
-                            <option value="Teko">Teko</option>
-                            <option value="Montserrat">Montserrat Black</option>
-                            <option value="Impact">Impact</option>
-                        </select>
+                        <label>Logo hochladen (PNG transparent)</label>
+                        <input type="file" id="logoImage" accept="image/*">
                     </div>
                     <div class="control-group">
-                        <label>Textfarbe</label>
-                        <input type="color" id="textColor2" value="#ffffff">
+                        <label>Logo Größe <span class="range-value" id="logoSizeValue">150px</span></label>
+                        <input type="range" id="logoSize" min="50" max="500" value="150">
                     </div>
                     <div class="control-group">
-                        <label>Textgröße <span class="range-value" id="fontSize2Value">120px</span></label>
-                        <input type="range" id="fontSize2" min="50" max="300" value="120">
+                        <label>Position X <span class="range-value" id="logoPosXValue">640</span></label>
+                        <input type="range" id="logoPosX" min="0" max="1280" value="640">
                     </div>
                     <div class="control-group">
-                        <label>Position Y <span class="range-value" id="textPosY2Value">520</span></label>
-                        <input type="range" id="textPosY2" min="400" max="650" value="520">
+                        <label>Position Y <span class="range-value" id="logoPosYValue">360</span></label>
+                        <input type="range" id="logoPosY" min="0" max="720" value="360">
                     </div>
                     <div class="control-group">
-                        <label>Buchstabenabstand <span class="range-value" id="letterSpacing2Value">20px</span></label>
-                        <input type="range" id="letterSpacing2" min="0" max="50" value="20">
+                        <label>Transparenz <span class="range-value" id="logoOpacityValue">80%</span></label>
+                        <input type="range" id="logoOpacity" min="0" max="100" value="80">
                     </div>
                     <div class="control-group">
-                        <label>Kontur Dicke <span class="range-value" id="stroke2Value">6px</span></label>
-                        <input type="range" id="stroke2" min="0" max="20" value="6">
-                    </div>
-                    <div class="control-group">
-                        <label>Konturfarbe</label>
-                        <input type="color" id="strokeColor2" value="#000000">
-                    </div>
-                    <div class="control-group">
-                        <label>Transparenz <span class="range-value" id="opacity2Value">100%</span></label>
-                        <input type="range" id="opacity2" min="0" max="100" value="100">
-                    </div>
-                    <div class="control-group">
-                        <label>Rotation <span class="range-value" id="rotation2Value">0°</span></label>
-                        <input type="range" id="rotation2" min="-45" max="45" value="0">
+                        <label>Rotation <span class="range-value" id="logoRotValue">0°</span></label>
+                        <input type="range" id="logoRot" min="-180" max="180" value="0">
                     </div>
                 </div>
 
                 <!-- Badge Section -->
                 <div class="section">
-                    <div class="section-title">🏷️ Badge / Label</div>
+                    <div class="section-title">🏷️ Badge</div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="showBadge" checked>
                         <label for="showBadge">Badge anzeigen</label>
@@ -505,57 +418,24 @@
                         <input type="color" id="badgeColor" value="#ff0844">
                     </div>
                     <div class="control-group">
-                        <label>Badge Position X <span class="range-value" id="badgePosXValue">100</span></label>
+                        <label>Position X <span class="range-value" id="badgePosXValue">100</span></label>
                         <input type="range" id="badgePosX" min="50" max="300" value="100">
                     </div>
                     <div class="control-group">
-                        <label>Badge Position Y <span class="range-value" id="badgePosYValue">100</span></label>
+                        <label>Position Y <span class="range-value" id="badgePosYValue">100</span></label>
                         <input type="range" id="badgePosY" min="50" max="300" value="100">
                     </div>
                     <div class="control-group">
-                        <label>Badge Größe <span class="range-value" id="badgeSizeValue">1.0</span></label>
+                        <label>Größe <span class="range-value" id="badgeSizeValue">1.0</span></label>
                         <input type="range" id="badgeSize" min="0.5" max="2" step="0.1" value="1.0">
                     </div>
                     <div class="control-group">
-                        <label>Badge Rotation <span class="range-value" id="badgeRotValue">-15°</span></label>
+                        <label>Rotation <span class="range-value" id="badgeRotValue">-15°</span></label>
                         <input type="range" id="badgeRot" min="-45" max="45" value="-15">
                     </div>
                 </div>
 
-                <!-- Logo Section -->
-                <div class="section">
-                    <div class="section-title">🎨 Logo (Transparent)</div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="showLogo">
-                        <label for="showLogo">Logo anzeigen</label>
-                    </div>
-                    <div class="control-group">
-                        <label>Logo hochladen (PNG transparent empfohlen)</label>
-                        <input type="file" id="logoImage" accept="image/*">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Größe <span class="range-value" id="logoSizeValue">150px</span></label>
-                        <input type="range" id="logoSize" min="50" max="500" value="150">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Position X <span class="range-value" id="logoPosXValue">640</span></label>
-                        <input type="range" id="logoPosX" min="0" max="1280" value="640">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Position Y <span class="range-value" id="logoPosYValue">360</span></label>
-                        <input type="range" id="logoPosY" min="0" max="720" value="360">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Transparenz <span class="range-value" id="logoOpacityValue">80%</span></label>
-                        <input type="range" id="logoOpacity" min="0" max="100" value="80">
-                    </div>
-                    <div class="control-group">
-                        <label>Logo Rotation <span class="range-value" id="logoRotValue">0°</span></label>
-                        <input type="range" id="logoRot" min="-180" max="180" value="0">
-                    </div>
-                </div>
-
-                <!-- BPM & Info Section -->
+                <!-- BPM & Info -->
                 <div class="section">
                     <div class="section-title">ℹ️ Beat Info</div>
                     <div class="control-group">
@@ -563,25 +443,25 @@
                         <input type="number" id="bpm" value="140" min="60" max="200">
                     </div>
                     <div class="control-group">
-                        <label>Zusatztext (unten rechts)</label>
+                        <label>Zusatztext</label>
                         <input type="text" id="infoText" value="Prod. by WIB" maxlength="50">
                     </div>
                     <div class="control-group">
-                        <label>Zusatztext Größe <span class="range-value" id="infoSizeValue">24px</span></label>
+                        <label>Textgröße <span class="range-value" id="infoSizeValue">24px</span></label>
                         <input type="range" id="infoSize" min="12" max="50" value="24">
                     </div>
                     <div class="control-group">
-                        <label>Zusatztext Farbe</label>
+                        <label>Textfarbe</label>
                         <input type="color" id="infoColor" value="#ffffff">
                     </div>
                 </div>
 
-                <!-- Animation Section -->
+                <!-- Animation -->
                 <div class="section">
                     <div class="section-title">🎬 Animation</div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="enableReactive">
-                        <label for="enableReactive">Audio-reaktive Animation</label>
+                        <label for="enableReactive">Audio-Reaktiv</label>
                     </div>
                     <div class="control-group">
                         <label>Puls-Stärke <span class="range-value" id="pulseValue">20</span></label>
@@ -589,7 +469,7 @@
                     </div>
                 </div>
 
-                <!-- Audio Section -->
+                <!-- Audio -->
                 <div class="section">
                     <div class="section-title">🎵 Audio</div>
                     <div class="control-group">
@@ -614,7 +494,10 @@
                 <!-- Export Actions -->
                 <div class="section">
                     <button class="action-btn" onclick="downloadImage()">💾 Als PNG speichern</button>
-                    <button class="action-btn secondary" id="recordBtn" onclick="recordVideo()">🎬 Als Video exportieren</button>
+                    <button class="action-btn secondary" id="recordBtn" onclick="recordVideo()">🎬 Video aufnehmen (Echtzeit)</button>
+                    <p style="font-size: 11px; color: #999; margin-top: 8px; line-height: 1.4;">
+                        💡 Echtzeit-Aufnahme - dauert nur so lange wie das Audio!
+                    </p>
                 </div>
             </div>
 
@@ -637,9 +520,24 @@
         const canvas = document.getElementById('renderCanvas');
         const ctx = canvas.getContext('2d');
 
-        // State
+        // Text layer configurations
+        const textDefaults = [
+            { text: 'DRILL', size: 120, x: 640, y: 200, spacing: 20, stroke: 6, rot: 0, opacity: 100, color: '#ffffff', strokeColor: '#000000', font: 'Bebas Neue', show: true },
+            { text: 'BALKAN', size: 120, x: 640, y: 520, spacing: 20, stroke: 6, rot: 0, opacity: 100, color: '#ffffff', strokeColor: '#000000', font: 'Bebas Neue', show: true },
+            { text: '', size: 60, x: 640, y: 360, spacing: 10, stroke: 4, rot: 0, opacity: 100, color: '#ffff00', strokeColor: '#000000', font: 'Bebas Neue', show: false },
+            { text: '', size: 40, x: 640, y: 100, spacing: 5, stroke: 3, rot: 0, opacity: 100, color: '#00ff00', strokeColor: '#000000', font: 'Bebas Neue', show: false },
+            { text: '', size: 30, x: 640, y: 650, spacing: 3, stroke: 2, rot: 0, opacity: 100, color: '#ff00ff', strokeColor: '#000000', font: 'Bebas Neue', show: false }
+        ];
+
+        // Font options
+        const fonts = [
+            'Bebas Neue', 'Anton', 'Oswald', 'Russo One', 'Black Ops One',
+            'Permanent Marker', 'Righteous', 'Staatliches', 'Passion One',
+            'Teko', 'Montserrat', 'Impact'
+        ];
+
+        // State - generate text state dynamically
         const state = {
-            // Background
             backgroundImage: null,
             bgBrightness: 100,
             bgBlur: 0,
@@ -648,31 +546,9 @@
             bgPosY: 50,
             bgOverlay: 30,
             
-            // Text 1
-            text1: 'DRILL',
-            font1: 'Bebas Neue',
-            textColor1: '#ffffff',
-            fontSize1: 120,
-            textPosY1: 200,
-            letterSpacing1: 20,
-            stroke1: 6,
-            strokeColor1: '#000000',
-            opacity1: 100,
-            rotation1: 0,
+            // Text layers (dynamically added)
+            texts: textDefaults.map(t => ({...t})),
             
-            // Text 2
-            text2: 'BALKAN',
-            font2: 'Bebas Neue',
-            textColor2: '#ffffff',
-            fontSize2: 120,
-            textPosY2: 520,
-            letterSpacing2: 20,
-            stroke2: 6,
-            strokeColor2: '#000000',
-            opacity2: 100,
-            rotation2: 0,
-            
-            // Badge
             showBadge: true,
             badge: 'FREE',
             badgeColor: '#ff0844',
@@ -681,7 +557,6 @@
             badgeSize: 1.0,
             badgeRot: -15,
             
-            // Logo
             showLogo: false,
             logoImage: null,
             logoSize: 150,
@@ -690,13 +565,11 @@
             logoOpacity: 80,
             logoRot: 0,
             
-            // Info
             bpm: 140,
             infoText: 'Prod. by WIB',
             infoSize: 24,
             infoColor: '#ffffff',
             
-            // Animation
             enableReactive: false,
             pulseStrength: 20
         };
@@ -712,241 +585,157 @@
         let audioSource = null;
         let isPlaying = false;
         let animationId = null;
+        let currentRecorder = null;
+        let recordChunks = [];
 
-        // Event Listeners
-        document.getElementById('backgroundImage').addEventListener('change', handleBackgroundUpload);
-        document.getElementById('logoImage').addEventListener('change', handleLogoUpload);
-        document.getElementById('audioFile').addEventListener('change', handleAudioUpload);
-
-        // Background controls
-        document.getElementById('bgBrightness').addEventListener('input', (e) => {
-            state.bgBrightness = parseInt(e.target.value);
-            document.getElementById('bgBrightnessValue').textContent = state.bgBrightness + '%';
-            render();
-        });
-        document.getElementById('bgBlur').addEventListener('input', (e) => {
-            state.bgBlur = parseInt(e.target.value);
-            document.getElementById('bgBlurValue').textContent = state.bgBlur + 'px';
-            render();
-        });
-        document.getElementById('bgScale').addEventListener('input', (e) => {
-            state.bgScale = parseInt(e.target.value);
-            document.getElementById('bgScaleValue').textContent = state.bgScale + '%';
-            render();
-        });
-        document.getElementById('bgPosX').addEventListener('input', (e) => {
-            state.bgPosX = parseInt(e.target.value);
-            document.getElementById('bgPosXValue').textContent = state.bgPosX + '%';
-            render();
-        });
-        document.getElementById('bgPosY').addEventListener('input', (e) => {
-            state.bgPosY = parseInt(e.target.value);
-            document.getElementById('bgPosYValue').textContent = state.bgPosY + '%';
-            render();
-        });
-        document.getElementById('bgOverlay').addEventListener('input', (e) => {
-            state.bgOverlay = parseInt(e.target.value);
-            document.getElementById('bgOverlayValue').textContent = state.bgOverlay + '%';
-            render();
-        });
-
-        // Text 1 controls
-        document.getElementById('text1').addEventListener('input', (e) => {
-            state.text1 = e.target.value.toUpperCase();
-            render();
-        });
-        document.getElementById('font1').addEventListener('change', (e) => {
-            state.font1 = e.target.value;
-            render();
-        });
-        document.getElementById('textColor1').addEventListener('input', (e) => {
-            state.textColor1 = e.target.value;
-            render();
-        });
-        document.getElementById('fontSize1').addEventListener('input', (e) => {
-            state.fontSize1 = parseInt(e.target.value);
-            document.getElementById('fontSize1Value').textContent = state.fontSize1 + 'px';
-            render();
-        });
-        document.getElementById('textPosY1').addEventListener('input', (e) => {
-            state.textPosY1 = parseInt(e.target.value);
-            document.getElementById('textPosY1Value').textContent = state.textPosY1;
-            render();
-        });
-        document.getElementById('letterSpacing1').addEventListener('input', (e) => {
-            state.letterSpacing1 = parseInt(e.target.value);
-            document.getElementById('letterSpacing1Value').textContent = state.letterSpacing1 + 'px';
-            render();
-        });
-        document.getElementById('stroke1').addEventListener('input', (e) => {
-            state.stroke1 = parseInt(e.target.value);
-            document.getElementById('stroke1Value').textContent = state.stroke1 + 'px';
-            render();
-        });
-        document.getElementById('strokeColor1').addEventListener('input', (e) => {
-            state.strokeColor1 = e.target.value;
-            render();
-        });
-        document.getElementById('opacity1').addEventListener('input', (e) => {
-            state.opacity1 = parseInt(e.target.value);
-            document.getElementById('opacity1Value').textContent = state.opacity1 + '%';
-            render();
-        });
-        document.getElementById('rotation1').addEventListener('input', (e) => {
-            state.rotation1 = parseInt(e.target.value);
-            document.getElementById('rotation1Value').textContent = state.rotation1 + '°';
-            render();
-        });
-
-        // Text 2 controls
-        document.getElementById('text2').addEventListener('input', (e) => {
-            state.text2 = e.target.value.toUpperCase();
-            render();
-        });
-        document.getElementById('font2').addEventListener('change', (e) => {
-            state.font2 = e.target.value;
-            render();
-        });
-        document.getElementById('textColor2').addEventListener('input', (e) => {
-            state.textColor2 = e.target.value;
-            render();
-        });
-        document.getElementById('fontSize2').addEventListener('input', (e) => {
-            state.fontSize2 = parseInt(e.target.value);
-            document.getElementById('fontSize2Value').textContent = state.fontSize2 + 'px';
-            render();
-        });
-        document.getElementById('textPosY2').addEventListener('input', (e) => {
-            state.textPosY2 = parseInt(e.target.value);
-            document.getElementById('textPosY2Value').textContent = state.textPosY2;
-            render();
-        });
-        document.getElementById('letterSpacing2').addEventListener('input', (e) => {
-            state.letterSpacing2 = parseInt(e.target.value);
-            document.getElementById('letterSpacing2Value').textContent = state.letterSpacing2 + 'px';
-            render();
-        });
-        document.getElementById('stroke2').addEventListener('input', (e) => {
-            state.stroke2 = parseInt(e.target.value);
-            document.getElementById('stroke2Value').textContent = state.stroke2 + 'px';
-            render();
-        });
-        document.getElementById('strokeColor2').addEventListener('input', (e) => {
-            state.strokeColor2 = e.target.value;
-            render();
-        });
-        document.getElementById('opacity2').addEventListener('input', (e) => {
-            state.opacity2 = parseInt(e.target.value);
-            document.getElementById('opacity2Value').textContent = state.opacity2 + '%';
-            render();
-        });
-        document.getElementById('rotation2').addEventListener('input', (e) => {
-            state.rotation2 = parseInt(e.target.value);
-            document.getElementById('rotation2Value').textContent = state.rotation2 + '°';
-            render();
-        });
-
-        // Badge controls
-        document.getElementById('showBadge').addEventListener('change', (e) => {
-            state.showBadge = e.target.checked;
-            render();
-        });
-        document.getElementById('badge').addEventListener('input', (e) => {
-            state.badge = e.target.value.toUpperCase();
-            render();
-        });
-        document.getElementById('badgeColor').addEventListener('input', (e) => {
-            state.badgeColor = e.target.value;
-            render();
-        });
-        document.getElementById('badgePosX').addEventListener('input', (e) => {
-            state.badgePosX = parseInt(e.target.value);
-            document.getElementById('badgePosXValue').textContent = state.badgePosX;
-            render();
-        });
-        document.getElementById('badgePosY').addEventListener('input', (e) => {
-            state.badgePosY = parseInt(e.target.value);
-            document.getElementById('badgePosYValue').textContent = state.badgePosY;
-            render();
-        });
-        document.getElementById('badgeSize').addEventListener('input', (e) => {
-            state.badgeSize = parseFloat(e.target.value);
-            document.getElementById('badgeSizeValue').textContent = state.badgeSize.toFixed(1);
-            render();
-        });
-        document.getElementById('badgeRot').addEventListener('input', (e) => {
-            state.badgeRot = parseInt(e.target.value);
-            document.getElementById('badgeRotValue').textContent = state.badgeRot + '°';
-            render();
-        });
-
-        // Logo controls
-        document.getElementById('showLogo').addEventListener('change', (e) => {
-            state.showLogo = e.target.checked;
-            render();
-        });
-        document.getElementById('logoSize').addEventListener('input', (e) => {
-            state.logoSize = parseInt(e.target.value);
-            document.getElementById('logoSizeValue').textContent = state.logoSize + 'px';
-            render();
-        });
-        document.getElementById('logoPosX').addEventListener('input', (e) => {
-            state.logoPosX = parseInt(e.target.value);
-            document.getElementById('logoPosXValue').textContent = state.logoPosX;
-            render();
-        });
-        document.getElementById('logoPosY').addEventListener('input', (e) => {
-            state.logoPosY = parseInt(e.target.value);
-            document.getElementById('logoPosYValue').textContent = state.logoPosY;
-            render();
-        });
-        document.getElementById('logoOpacity').addEventListener('input', (e) => {
-            state.logoOpacity = parseInt(e.target.value);
-            document.getElementById('logoOpacityValue').textContent = state.logoOpacity + '%';
-            render();
-        });
-        document.getElementById('logoRot').addEventListener('input', (e) => {
-            state.logoRot = parseInt(e.target.value);
-            document.getElementById('logoRotValue').textContent = state.logoRot + '°';
-            render();
-        });
-
-        // Info controls
-        document.getElementById('bpm').addEventListener('input', (e) => {
-            state.bpm = parseInt(e.target.value);
-            render();
-        });
-        document.getElementById('infoText').addEventListener('input', (e) => {
-            state.infoText = e.target.value;
-            render();
-        });
-        document.getElementById('infoSize').addEventListener('input', (e) => {
-            state.infoSize = parseInt(e.target.value);
-            document.getElementById('infoSizeValue').textContent = state.infoSize + 'px';
-            render();
-        });
-        document.getElementById('infoColor').addEventListener('input', (e) => {
-            state.infoColor = e.target.value;
-            render();
-        });
-
-        // Animation controls
-        document.getElementById('enableReactive').addEventListener('change', (e) => {
-            state.enableReactive = e.target.checked;
-            if (state.enableReactive && isPlaying) {
-                render();
+        // Generate text controls dynamically
+        function generateTextControls() {
+            const container = document.getElementById('textControls');
+            let html = '';
+            
+            for (let i = 0; i < 5; i++) {
+                const num = i + 1;
+                html += `
+                <div class="section">
+                    <div class="section-title">✏️ Text ${num}</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showText${num}" ${state.texts[i].show ? 'checked' : ''}>
+                        <label for="showText${num}">Text ${num} anzeigen</label>
+                    </div>
+                    <div class="control-group">
+                        <label>Text</label>
+                        <input type="text" id="text${num}" value="${state.texts[i].text}" maxlength="50" placeholder="Text ${num}">
+                    </div>
+                    <div class="control-group">
+                        <label>Schriftart</label>
+                        <select id="font${num}">
+                            ${fonts.map(f => `<option value="${f}" ${f === state.texts[i].font ? 'selected' : ''}>${f}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label>Textfarbe</label>
+                        <input type="color" id="textColor${num}" value="${state.texts[i].color}">
+                    </div>
+                    <div class="control-group">
+                        <label>Textgröße <span class="range-value" id="fontSize${num}Value">${state.texts[i].size}px</span></label>
+                        <input type="range" id="fontSize${num}" min="20" max="300" value="${state.texts[i].size}">
+                    </div>
+                    <div class="control-group">
+                        <label>Position X <span class="range-value" id="textPosX${num}Value">${state.texts[i].x}</span></label>
+                        <input type="range" id="textPosX${num}" min="0" max="1280" value="${state.texts[i].x}">
+                    </div>
+                    <div class="control-group">
+                        <label>Position Y <span class="range-value" id="textPosY${num}Value">${state.texts[i].y}</span></label>
+                        <input type="range" id="textPosY${num}" min="0" max="720" value="${state.texts[i].y}">
+                    </div>
+                    <div class="control-group">
+                        <label>Buchstabenabstand <span class="range-value" id="letterSpacing${num}Value">${state.texts[i].spacing}px</span></label>
+                        <input type="range" id="letterSpacing${num}" min="-10" max="50" value="${state.texts[i].spacing}">
+                    </div>
+                    <div class="control-group">
+                        <label>Kontur Dicke <span class="range-value" id="stroke${num}Value">${state.texts[i].stroke}px</span></label>
+                        <input type="range" id="stroke${num}" min="0" max="30" value="${state.texts[i].stroke}">
+                    </div>
+                    <div class="control-group">
+                        <label>Konturfarbe</label>
+                        <input type="color" id="strokeColor${num}" value="${state.texts[i].strokeColor}">
+                    </div>
+                    <div class="control-group">
+                        <label>Transparenz <span class="range-value" id="opacity${num}Value">${state.texts[i].opacity}%</span></label>
+                        <input type="range" id="opacity${num}" min="0" max="100" value="${state.texts[i].opacity}">
+                    </div>
+                    <div class="control-group">
+                        <label>Rotation <span class="range-value" id="rotation${num}Value">${state.texts[i].rot}°</span></label>
+                        <input type="range" id="rotation${num}" min="-180" max="180" value="${state.texts[i].rot}">
+                    </div>
+                </div>`;
             }
-        });
-        document.getElementById('pulseStrength').addEventListener('input', (e) => {
-            state.pulseStrength = parseInt(e.target.value);
-            document.getElementById('pulseValue').textContent = state.pulseStrength;
-        });
+            
+            container.innerHTML = html;
+        }
+
+        // Initialize text controls
+        generateTextControls();
+
+        // Setup all event listeners
+        function setupEventListeners() {
+            // Background controls
+            document.getElementById('backgroundImage').addEventListener('change', handleBackgroundUpload);
+            document.getElementById('bgBrightness').addEventListener('input', e => updateAndRender('bgBrightness', parseInt(e.target.value), '%'));
+            document.getElementById('bgBlur').addEventListener('input', e => updateAndRender('bgBlur', parseInt(e.target.value), 'px'));
+            document.getElementById('bgScale').addEventListener('input', e => updateAndRender('bgScale', parseInt(e.target.value), '%'));
+            document.getElementById('bgPosX').addEventListener('input', e => updateAndRender('bgPosX', parseInt(e.target.value), '%'));
+            document.getElementById('bgPosY').addEventListener('input', e => updateAndRender('bgPosY', parseInt(e.target.value), '%'));
+            document.getElementById('bgOverlay').addEventListener('input', e => updateAndRender('bgOverlay', parseInt(e.target.value), '%'));
+
+            // Text controls for all 5 layers
+            for (let i = 0; i < 5; i++) {
+                const num = i + 1;
+                document.getElementById(`showText${num}`).addEventListener('change', e => { state.texts[i].show = e.target.checked; render(); });
+                document.getElementById(`text${num}`).addEventListener('input', e => { state.texts[i].text = e.target.value.toUpperCase(); render(); });
+                document.getElementById(`font${num}`).addEventListener('change', e => { state.texts[i].font = e.target.value; render(); });
+                document.getElementById(`textColor${num}`).addEventListener('input', e => { state.texts[i].color = e.target.value; render(); });
+                document.getElementById(`fontSize${num}`).addEventListener('input', e => updateTextAndRender(i, 'size', parseInt(e.target.value), 'px'));
+                document.getElementById(`textPosX${num}`).addEventListener('input', e => updateTextAndRender(i, 'x', parseInt(e.target.value)));
+                document.getElementById(`textPosY${num}`).addEventListener('input', e => updateTextAndRender(i, 'y', parseInt(e.target.value)));
+                document.getElementById(`letterSpacing${num}`).addEventListener('input', e => updateTextAndRender(i, 'spacing', parseInt(e.target.value), 'px'));
+                document.getElementById(`stroke${num}`).addEventListener('input', e => updateTextAndRender(i, 'stroke', parseInt(e.target.value), 'px'));
+                document.getElementById(`strokeColor${num}`).addEventListener('input', e => { state.texts[i].strokeColor = e.target.value; render(); });
+                document.getElementById(`opacity${num}`).addEventListener('input', e => updateTextAndRender(i, 'opacity', parseInt(e.target.value), '%'));
+                document.getElementById(`rotation${num}`).addEventListener('input', e => updateTextAndRender(i, 'rot', parseInt(e.target.value), '°'));
+            }
+
+            // Logo controls
+            document.getElementById('logoImage').addEventListener('change', handleLogoUpload);
+            document.getElementById('showLogo').addEventListener('change', e => { state.showLogo = e.target.checked; render(); });
+            document.getElementById('logoSize').addEventListener('input', e => updateAndRender('logoSize', parseInt(e.target.value), 'px'));
+            document.getElementById('logoPosX').addEventListener('input', e => updateAndRender('logoPosX', parseInt(e.target.value)));
+            document.getElementById('logoPosY').addEventListener('input', e => updateAndRender('logoPosY', parseInt(e.target.value)));
+            document.getElementById('logoOpacity').addEventListener('input', e => updateAndRender('logoOpacity', parseInt(e.target.value), '%'));
+            document.getElementById('logoRot').addEventListener('input', e => updateAndRender('logoRot', parseInt(e.target.value), '°'));
+
+            // Badge controls
+            document.getElementById('showBadge').addEventListener('change', e => { state.showBadge = e.target.checked; render(); });
+            document.getElementById('badge').addEventListener('input', e => { state.badge = e.target.value.toUpperCase(); render(); });
+            document.getElementById('badgeColor').addEventListener('input', e => { state.badgeColor = e.target.value; render(); });
+            document.getElementById('badgePosX').addEventListener('input', e => updateAndRender('badgePosX', parseInt(e.target.value)));
+            document.getElementById('badgePosY').addEventListener('input', e => updateAndRender('badgePosY', parseInt(e.target.value)));
+            document.getElementById('badgeSize').addEventListener('input', e => { state.badgeSize = parseFloat(e.target.value); document.getElementById('badgeSizeValue').textContent = state.badgeSize.toFixed(1); render(); });
+            document.getElementById('badgeRot').addEventListener('input', e => updateAndRender('badgeRot', parseInt(e.target.value), '°'));
+
+            // Info controls
+            document.getElementById('bpm').addEventListener('input', e => { state.bpm = parseInt(e.target.value); render(); });
+            document.getElementById('infoText').addEventListener('input', e => { state.infoText = e.target.value; render(); });
+            document.getElementById('infoSize').addEventListener('input', e => updateAndRender('infoSize', parseInt(e.target.value), 'px'));
+            document.getElementById('infoColor').addEventListener('input', e => { state.infoColor = e.target.value; render(); });
+
+            // Animation controls
+            document.getElementById('enableReactive').addEventListener('change', e => { state.enableReactive = e.target.checked; if (state.enableReactive && isPlaying) render(); });
+            document.getElementById('pulseStrength').addEventListener('input', e => { state.pulseStrength = parseInt(e.target.value); document.getElementById('pulseValue').textContent = state.pulseStrength; });
+
+            // Audio
+            document.getElementById('audioFile').addEventListener('change', handleAudioUpload);
+        }
+
+        function updateAndRender(key, value, suffix = '') {
+            state[key] = value;
+            document.getElementById(`${key}Value`).textContent = value + suffix;
+            render();
+        }
+
+        function updateTextAndRender(index, key, value, suffix = '') {
+            state.texts[index][key] = value;
+            const num = index + 1;
+            const keyMap = { size: 'fontSize', x: 'textPosX', y: 'textPosY', spacing: 'letterSpacing', opacity: 'opacity', rot: 'rotation', stroke: 'stroke' };
+            const elemKey = keyMap[key] || key;
+            document.getElementById(`${elemKey}${num}Value`).textContent = value + suffix;
+            render();
+        }
 
         // File handlers
         function handleBackgroundUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
@@ -963,7 +752,6 @@
         function handleLogoUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = (event) => {
                 const img = new Image();
@@ -982,21 +770,14 @@
         function handleAudioUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
-
             const url = URL.createObjectURL(file);
             audioElement.src = url;
-
-            if (audioSource) {
-                audioSource.disconnect();
-            }
-
+            if (audioSource) audioSource.disconnect();
             audioSource = audioContext.createMediaElementSource(audioElement);
             audioSource.connect(analyser);
             analyser.connect(audioContext.destination);
-
             audioElement.addEventListener('timeupdate', updateTime);
             audioElement.addEventListener('loadedmetadata', updateTime);
-
             showStatus('✅ Audio geladen!');
         }
 
@@ -1008,10 +789,8 @@
 
         // Render function
         function render() {
-            // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Get audio data if reactive
             let bassLevel = 0;
             if (state.enableReactive && isPlaying) {
                 analyser.getByteFrequencyData(dataArray);
@@ -1022,20 +801,11 @@
             // Draw background
             if (state.backgroundImage) {
                 ctx.save();
-                
-                // Apply filters
                 let filterString = '';
-                if (state.bgBrightness !== 100) {
-                    filterString += `brightness(${state.bgBrightness}%)`;
-                }
-                if (state.bgBlur > 0) {
-                    filterString += ` blur(${state.bgBlur}px)`;
-                }
-                if (filterString) {
-                    ctx.filter = filterString;
-                }
+                if (state.bgBrightness !== 100) filterString += `brightness(${state.bgBrightness}%)`;
+                if (state.bgBlur > 0) filterString += ` blur(${state.bgBlur}px)`;
+                if (filterString) ctx.filter = filterString;
 
-                // Calculate scale and position
                 const scale = state.bgScale / 100;
                 const imgWidth = state.backgroundImage.width;
                 const imgHeight = state.backgroundImage.height;
@@ -1055,17 +825,14 @@
                 const offsetY = (canvas.height - drawHeight) * (state.bgPosY / 100);
 
                 ctx.drawImage(state.backgroundImage, offsetX, offsetY, drawWidth, drawHeight);
-                
                 ctx.filter = 'none';
                 ctx.restore();
 
-                // Overlay
                 if (state.bgOverlay > 0) {
                     ctx.fillStyle = `rgba(0, 0, 0, ${state.bgOverlay / 100})`;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                 }
             } else {
-                // Default gradient background
                 const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
                 gradient.addColorStop(0, '#1a1a1a');
                 gradient.addColorStop(1, '#0a0a0a');
@@ -1073,39 +840,16 @@
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
 
-            // Draw Text 1 with animation
-            drawText(
-                state.text1,
-                state.font1,
-                state.fontSize1,
-                state.textColor1,
-                state.textPosY1,
-                state.letterSpacing1,
-                state.stroke1,
-                state.strokeColor1,
-                state.opacity1,
-                state.rotation1,
-                bassLevel
-            );
-
-            // Draw Text 2 with animation
-            drawText(
-                state.text2,
-                state.font2,
-                state.fontSize2,
-                state.textColor2,
-                state.textPosY2,
-                state.letterSpacing2,
-                state.stroke2,
-                state.strokeColor2,
-                state.opacity2,
-                state.rotation2,
-                bassLevel
-            );
+            // Draw all texts
+            state.texts.forEach((t, i) => {
+                if (t.show && t.text) {
+                    drawText(t.text, t.font, t.size, t.color, t.x, t.y, t.spacing, t.stroke, t.strokeColor, t.opacity, t.rot, bassLevel);
+                }
+            });
 
             // Draw Badge (NO animation)
             if (state.showBadge && state.badge) {
-                drawBadge(0); // Pass 0 to disable animation
+                drawBadge();
             }
 
             // Draw Logo (NO animation)
@@ -1113,49 +857,41 @@
                 drawLogo();
             }
 
-            // Draw Info (NO animation)
+            // Draw Info
             drawInfo();
 
-            // Continue animation
             if (state.enableReactive && isPlaying) {
                 animationId = requestAnimationFrame(render);
             }
         }
 
-        function drawText(text, font, size, color, posY, spacing, strokeWidth, strokeColor, opacity, rotation, bassLevel) {
+        function drawText(text, font, size, color, posX, posY, spacing, strokeWidth, strokeColor, opacity, rotation, bassLevel) {
             if (!text) return;
 
             ctx.save();
             
-            // Apply reactive pulse
-            const pulseSize = state.enableReactive && bassLevel > 0 
-                ? size + (bassLevel * state.pulseStrength) 
-                : size;
+            const pulseSize = state.enableReactive && bassLevel > 0 ? size + (bassLevel * state.pulseStrength) : size;
 
             ctx.font = `900 ${pulseSize}px "${font}"`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.globalAlpha = opacity / 100;
 
-            // Apply rotation
             if (rotation !== 0) {
-                ctx.translate(canvas.width / 2, posY);
+                ctx.translate(posX, posY);
                 ctx.rotate(rotation * Math.PI / 180);
-                ctx.translate(-canvas.width / 2, -posY);
+                ctx.translate(-posX, -posY);
             }
 
-            // Calculate total width with letter spacing
             const metrics = ctx.measureText(text);
             const totalSpacing = (text.length - 1) * spacing;
             const totalWidth = metrics.width + totalSpacing;
-            let x = (canvas.width - totalWidth) / 2;
+            let x = posX - (totalWidth / 2);
 
-            // Draw each character
             for (let i = 0; i < text.length; i++) {
                 const char = text[i];
                 const charMetrics = ctx.measureText(char);
 
-                // Draw stroke (NO SHADOW!)
                 if (strokeWidth > 0) {
                     ctx.strokeStyle = strokeColor;
                     ctx.lineWidth = strokeWidth;
@@ -1163,7 +899,6 @@
                     ctx.strokeText(char, x + charMetrics.width / 2, posY);
                 }
 
-                // Draw fill
                 ctx.fillStyle = color;
                 ctx.fillText(char, x + charMetrics.width / 2, posY);
 
@@ -1173,22 +908,17 @@
             ctx.restore();
         }
 
-        function drawBadge(bassLevel) {
+        function drawBadge() {
             ctx.save();
-
-            const scale = state.badgeSize * (state.enableReactive && bassLevel > 0 ? 1 + bassLevel * 0.1 : 1);
-            
             ctx.translate(state.badgePosX, state.badgePosY);
             ctx.rotate(state.badgeRot * Math.PI / 180);
-            ctx.scale(scale, scale);
+            ctx.scale(state.badgeSize, state.badgeSize);
 
-            // Badge background
             ctx.fillStyle = state.badgeColor;
             ctx.beginPath();
             ctx.roundRect(-60, -25, 120, 50, 8);
             ctx.fill();
 
-            // Badge text
             ctx.fillStyle = '#ffffff';
             ctx.font = 'bold 20px Arial';
             ctx.textAlign = 'center';
@@ -1200,29 +930,21 @@
 
         function drawLogo() {
             if (!state.logoImage) return;
-
             ctx.save();
             ctx.globalAlpha = state.logoOpacity / 100;
-
             ctx.translate(state.logoPosX, state.logoPosY);
             ctx.rotate(state.logoRot * Math.PI / 180);
-
             const logoW = state.logoSize;
             const logoH = (state.logoImage.height / state.logoImage.width) * logoW;
-
             ctx.drawImage(state.logoImage, -logoW / 2, -logoH / 2, logoW, logoH);
-
             ctx.restore();
         }
 
         function drawInfo() {
-            // BPM
             ctx.fillStyle = state.infoColor;
             ctx.font = `bold ${state.infoSize}px Arial`;
             ctx.textAlign = 'left';
             ctx.fillText(`${state.bpm} BPM`, 40, canvas.height - 40);
-
-            // Info text
             ctx.textAlign = 'right';
             ctx.fillText(state.infoText, canvas.width - 40, canvas.height - 40);
         }
@@ -1245,15 +967,11 @@
                 render();
             } else {
                 try {
-                    if (audioContext.state === 'suspended') {
-                        await audioContext.resume();
-                    }
+                    if (audioContext.state === 'suspended') await audioContext.resume();
                     await audioElement.play();
                     isPlaying = true;
                     document.getElementById('playBtn').textContent = '⏸';
-                    if (state.enableReactive) {
-                        render();
-                    }
+                    if (state.enableReactive) render();
                 } catch (error) {
                     console.error('Play error:', error);
                     showStatus('❌ Fehler beim Abspielen');
@@ -1271,24 +989,17 @@
 
         // Export functions
         function downloadImage() {
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-            }
+            if (animationId) cancelAnimationFrame(animationId);
             render();
-
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `WIB_${state.text1}_${state.text2}_${Date.now()}.png`;
+                a.download = `WIB_${Date.now()}.png`;
                 a.click();
                 URL.revokeObjectURL(url);
-
                 showStatus('✅ PNG gespeichert!');
-
-                if (state.enableReactive && isPlaying) {
-                    render();
-                }
+                if (state.enableReactive && isPlaying) render();
             });
         }
 
@@ -1299,52 +1010,20 @@
             }
 
             const recordBtn = document.getElementById('recordBtn');
-            recordBtn.disabled = true;
-            recordBtn.textContent = '⏳ Video wird erstellt...';
-            showStatus('🎬 Video wird generiert, bitte warten...');
+
+            if (currentRecorder && currentRecorder.state === 'recording') {
+                currentRecorder.stop();
+                audioElement.pause();
+                isPlaying = false;
+                document.getElementById('playBtn').textContent = '▶';
+                recordBtn.textContent = '🎬 Video aufnehmen (Echtzeit)';
+                recordBtn.classList.remove('secondary');
+                showStatus('⏳ Video wird finalisiert...');
+                return;
+            }
 
             try {
-                // Prepare for rendering
-                const duration = audioElement.duration;
-                const fps = 30;
-                const totalFrames = Math.ceil(duration * fps);
-                const frames = [];
-
-                // Enable reactive mode
-                const wasReactive = state.enableReactive;
-                state.enableReactive = true;
-
-                // Generate all frames
-                for (let frame = 0; frame < totalFrames; frame++) {
-                    const currentTime = frame / fps;
-                    audioElement.currentTime = currentTime;
-                    
-                    // Wait for audio to update
-                    await new Promise(resolve => setTimeout(resolve, 10));
-                    
-                    // Get audio data
-                    analyser.getByteFrequencyData(dataArray);
-                    
-                    // Render frame
-                    render();
-                    
-                    // Capture frame
-                    const imageData = canvas.toDataURL('image/png');
-                    frames.push(imageData);
-                    
-                    // Update progress
-                    const progress = Math.round((frame / totalFrames) * 100);
-                    recordBtn.textContent = `⏳ Rendering... ${progress}%`;
-                }
-
-                // Restore reactive state
-                state.enableReactive = wasReactive;
-
-                // Now create video from frames using MediaRecorder
-                showStatus('📦 Video wird zusammengebaut...');
-                recordBtn.textContent = '📦 Finalisierung...';
-
-                const canvasStream = canvas.captureStream(fps);
+                const canvasStream = canvas.captureStream(60);
                 const audioDestination = audioContext.createMediaStreamDestination();
                 audioSource.connect(audioDestination);
 
@@ -1353,56 +1032,62 @@
                     ...audioDestination.stream.getAudioTracks()
                 ]);
 
-                const chunks = [];
-                const recorder = new MediaRecorder(combinedStream, {
+                recordChunks = [];
+                currentRecorder = new MediaRecorder(combinedStream, {
                     mimeType: 'video/webm;codecs=vp9,opus',
-                    videoBitsPerSecond: 8000000
+                    videoBitsPerSecond: 10000000
                 });
 
-                recorder.ondataavailable = (e) => {
-                    if (e.data.size > 0) chunks.push(e.data);
+                currentRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) recordChunks.push(event.data);
                 };
 
-                recorder.onstop = () => {
-                    const blob = new Blob(chunks, { type: 'video/webm' });
+                currentRecorder.onstop = () => {
+                    const blob = new Blob(recordChunks, { type: 'video/webm' });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `WIB_${state.text1}_${state.text2}_${Date.now()}.webm`;
+                    a.download = `WIB_${Date.now()}.webm`;
                     a.click();
                     URL.revokeObjectURL(url);
 
                     recordBtn.disabled = false;
-                    recordBtn.textContent = '🎬 Als Video exportieren';
-                    showStatus('✅ Video gespeichert! (WebM Format - mit VLC in MP4 konvertierbar)');
+                    recordBtn.textContent = '🎬 Video aufnehmen (Echtzeit)';
+                    recordBtn.classList.remove('secondary');
+                    showStatus('✅ Video exportiert! (WebM - mit VLC als MP4 speichern)');
+                    currentRecorder = null;
                 };
 
-                recorder.start();
+                currentRecorder.start(100);
 
-                // Play through audio while recording
                 audioElement.currentTime = 0;
-                if (audioContext.state === 'suspended') {
-                    await audioContext.resume();
-                }
-                
+                if (audioContext.state === 'suspended') await audioContext.resume();
                 await audioElement.play();
                 isPlaying = true;
-                
+                document.getElementById('playBtn').textContent = '⏸';
+
                 state.enableReactive = true;
+                document.getElementById('enableReactive').checked = true;
                 render();
 
-                // Stop when audio ends
+                recordBtn.textContent = '⏹ Export stoppen';
+                recordBtn.classList.add('secondary');
+                showStatus('🔴 Aufnahme läuft - Echtzeit!');
+
                 audioElement.onended = () => {
-                    recorder.stop();
-                    isPlaying = false;
-                    document.getElementById('playBtn').textContent = '▶';
+                    if (currentRecorder && currentRecorder.state === 'recording') {
+                        currentRecorder.stop();
+                        isPlaying = false;
+                        document.getElementById('playBtn').textContent = '▶';
+                    }
                 };
 
             } catch (error) {
                 console.error('Export error:', error);
-                showStatus('❌ Fehler beim Exportieren: ' + error.message);
+                showStatus('❌ Fehler: ' + error.message);
                 recordBtn.disabled = false;
-                recordBtn.textContent = '🎬 Als Video exportieren';
+                recordBtn.textContent = '🎬 Video aufnehmen (Echtzeit)';
+                currentRecorder = null;
             }
         }
 
@@ -1417,86 +1102,51 @@
 
         // Presets
         const presets = {
-            drill: {
-                text1: 'DRILL',
-                text2: 'BALKAN',
-                textColor1: '#ffffff',
-                textColor2: '#ffffff',
-                badge: 'FREE',
-                badgeColor: '#ff0844',
-                bpm: 140
-            },
-            trap: {
-                text1: 'TRAP',
-                text2: 'BEAT',
-                textColor1: '#ffffff',
-                textColor2: '#9d00ff',
-                badge: 'FREE',
-                badgeColor: '#9d00ff',
-                bpm: 145
-            },
-            melodic: {
-                text1: 'MELODIC',
-                text2: 'VIBES',
-                textColor1: '#00d4ff',
-                textColor2: '#7b2cbf',
-                badge: 'FREE',
-                badgeColor: '#00d4ff',
-                bpm: 130
-            },
-            aggressive: {
-                text1: 'HARD',
-                text2: 'BEAT',
-                textColor1: '#ffffff',
-                textColor2: '#ff0000',
-                badge: 'NEW',
-                badgeColor: '#ff0000',
-                bpm: 150
-            },
-            balkan: {
-                text1: 'DRILL',
-                text2: 'BALKAN',
-                textColor1: '#ffffff',
-                textColor2: '#0066ff',
-                badge: 'FREE',
-                badgeColor: '#ff0000',
-                bpm: 140
-            },
-            dark: {
-                text1: 'DARK',
-                text2: 'BEAT',
-                textColor1: '#ffffff',
-                textColor2: '#999999',
-                badge: 'NEW',
-                badgeColor: '#4a4a4a',
-                bpm: 135
-            }
+            drill: { texts: [{ text: 'DRILL', show: true }, { text: 'BALKAN', show: true }], badge: 'FREE', badgeColor: '#ff0844', bpm: 140 },
+            trap: { texts: [{ text: 'TRAP', show: true }, { text: 'BEAT', show: true, color: '#9d00ff' }], badge: 'FREE', badgeColor: '#9d00ff', bpm: 145 },
+            melodic: { texts: [{ text: 'MELODIC', show: true, color: '#00d4ff' }, { text: 'VIBES', show: true, color: '#7b2cbf' }], badge: 'FREE', badgeColor: '#00d4ff', bpm: 130 },
+            aggressive: { texts: [{ text: 'HARD', show: true }, { text: 'BEAT', show: true, color: '#ff0000' }], badge: 'NEW', badgeColor: '#ff0000', bpm: 150 },
+            balkan: { texts: [{ text: 'DRILL', show: true }, { text: 'BALKAN', show: true, color: '#0066ff' }], badge: 'FREE', badgeColor: '#ff0000', bpm: 140 },
+            dark: { texts: [{ text: 'DARK', show: true }, { text: 'BEAT', show: true, color: '#999999' }], badge: 'NEW', badgeColor: '#4a4a4a', bpm: 135 }
         };
 
         function applyPreset(name) {
             const preset = presets[name];
+            
+            preset.texts.forEach((t, i) => {
+                if (t.text !== undefined) {
+                    state.texts[i].text = t.text;
+                    document.getElementById(`text${i + 1}`).value = t.text;
+                }
+                if (t.show !== undefined) {
+                    state.texts[i].show = t.show;
+                    document.getElementById(`showText${i + 1}`).checked = t.show;
+                }
+                if (t.color !== undefined) {
+                    state.texts[i].color = t.color;
+                    document.getElementById(`textColor${i + 1}`).value = t.color;
+                }
+            });
 
-            document.getElementById('text1').value = preset.text1;
-            document.getElementById('text2').value = preset.text2;
-            document.getElementById('textColor1').value = preset.textColor1;
-            document.getElementById('textColor2').value = preset.textColor2;
-            document.getElementById('badge').value = preset.badge;
-            document.getElementById('badgeColor').value = preset.badgeColor;
-            document.getElementById('bpm').value = preset.bpm;
-
-            state.text1 = preset.text1;
-            state.text2 = preset.text2;
-            state.textColor1 = preset.textColor1;
-            state.textColor2 = preset.textColor2;
-            state.badge = preset.badge;
-            state.badgeColor = preset.badgeColor;
-            state.bpm = preset.bpm;
+            if (preset.badge) {
+                state.badge = preset.badge;
+                document.getElementById('badge').value = preset.badge;
+            }
+            if (preset.badgeColor) {
+                state.badgeColor = preset.badgeColor;
+                document.getElementById('badgeColor').value = preset.badgeColor;
+            }
+            if (preset.bpm) {
+                state.bpm = preset.bpm;
+                document.getElementById('bpm').value = preset.bpm;
+            }
 
             render();
             showStatus(`✅ Vorlage "${name}" angewendet!`);
         }
 
-        // Initial render
+        // Initialize
+        setupEventListeners();
         render();
     </script>
 </body>
